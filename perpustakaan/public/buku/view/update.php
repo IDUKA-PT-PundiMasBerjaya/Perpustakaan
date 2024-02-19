@@ -77,7 +77,7 @@
             </tr>
             <tr>
                 <td>Gambar</td>
-                <td><input type="text" name="gambar" required></td>
+                <td><input type="text" name="gambar" value="<?php echo $gambar ?>" required></td>
             </tr>
             <tr>
                 <td>ID Pelajaran</td>

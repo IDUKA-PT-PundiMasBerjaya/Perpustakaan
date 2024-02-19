@@ -46,13 +46,13 @@
 		<?php  
 			while ($userAmbilData = mysqli_fetch_array($ambildata)) {
 				echo "<tr>";
-                    echo "<td>" . $userAmbilData['id'] . "</td>";
-                    echo "<td>" . $userAmbilData['judul'] . "</td>";
-                    echo "<td>" . $userAmbilData['penulis'] . "</td>";
-                    echo "<td>" . $userAmbilData['keterangan'] . "</td>";
-                    echo "<td>" . $userAmbilData['stok'] . "</td>";
-                    echo "<td>" . $userAmbilData['gambar'] . "</td>";
-                    echo "<td>" . $userAmbilData['matapelajaran_idpelajaran'] . "</td>";
+                    echo "<td>" . $id = $userAmbilData['id'] . "</td>";
+                    echo "<td>" . $judul = $userAmbilData['judul'] . "</td>";
+                    echo "<td>" . $penulis =$userAmbilData['penulis'] . "</td>";
+                    echo "<td>" . $keterangan = $userAmbilData['keterangan'] . "</td>";
+                    echo "<td>" . $stok = $userAmbilData['stok'] . "</td>";
+                    echo "<td>" . $gambar = $userAmbilData['gambar'] . "</td>";
+                    echo "<td>" . $atapelajaran_idpelajaran = $userAmbilData['matapelajaran_idpelajaran'] . "</td>";
 					echo "<td> 
 							<a href='../../buku/view/view.php?id=" . $userAmbilData['id'] . "'> View </a> | 
 							<a href='../../buku/view/update.php?id=" . $userAmbilData['id'] . "'> Edit </a> | 
