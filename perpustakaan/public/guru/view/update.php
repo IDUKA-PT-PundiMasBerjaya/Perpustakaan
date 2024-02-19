@@ -46,7 +46,7 @@
 </head>
 <body>
 	<h1>Update Data Guru</h1>
-	<a href="../../dashboard/dashboard.php">Home</a>
+	<a href="../../dashboard/data/dashboardguru.php">Home</a>
 	<form action="update.php" method="POST", name="update", enctype="multipart/form-data">
 		<table border="1">
 			<tr>
