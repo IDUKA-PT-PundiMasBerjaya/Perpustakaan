@@ -24,7 +24,7 @@
 	<a href="data/dashboardguru.php"> Data Guru |</a>
 	<a href="data/dashboardkelas.php"> Data Kelas |</a>
 	<a href="data/dashboardsiswa.php"> Data Siswa |</a>
-	<a href="data/dashboardpeminjaman.php">| Data Peminjam |</a>
+	<a href="data/dashboardpinjam.php">| Data Peminjam |</a>
 	<a href="data/dashboardpengembalian.php"> Data Pengembali |</a>
 </body>
 <br><a href="../../logout.php">| Logout |</a>

@@ -52,7 +52,6 @@
 					echo "<td> 
 							<a href='../../guru/view/view.php?id=" . $userAmbilData['id'] . "'> View </a> | 
 							<a href='../../guru/view/update.php?id=" . $userAmbilData['id'] . "'> Edit </a> | 
-							<a href='../../guru/Controller/guruhapus.php?id=" . $userAmbilData['id'] ."'> Hapus </a> 
 						</td>";
 				echo "</tr>";
 			}

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 18, 2024 at 02:03 PM
+-- Generation Time: Feb 20, 2024 at 06:32 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -42,7 +42,8 @@ CREATE TABLE `buku` (
 --
 
 INSERT INTO `buku` (`id`, `judul`, `penulis`, `keterangan`, `stok`, `gambar`, `matapelajaran_idpelajaran`) VALUES
-(1, 'Laut Bercerita ', 'Leila.S Chudori', 'Novel sejarah ini bercerita tentang kisah perjuangan Laut, seorang mahasiswa sekaligus aktivis kriti', 25, '1', 1);
+(1, 'Matematika', 'Daliman, S.Pd', 'Belajar Berhitung', 50, '-', 1),
+(2, 'Bahasa Indonesia', 'Sundari Utami S.Pd', 'Belajar Membaca dan Menulis', 45, '-', 2);
 
 -- --------------------------------------------------------
 
@@ -63,7 +64,7 @@ CREATE TABLE `guru` (
 --
 
 INSERT INTO `guru` (`id`, `namaguru`, `alamat`, `email`, `no_hp`) VALUES
-(1, 'Enno', 'Perum Griya KPN', 'tevirchan@gmail.com', '082388310607'),
+(1, 'Iqbal', 'Batu Aji', 'iqbaldezwan@gmail.com', '081363701298'),
 (2, 'Alief', 'Taras', 'alief@gmail.com', '085264562334'),
 (3, 'Agil', 'Batu Besar', 'agilazmi@gmail.com', '081261556984');
 
@@ -82,6 +83,13 @@ CREATE TABLE `kelas` (
   `gambar_kelas` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `kelas`
+--
+
+INSERT INTO `kelas` (`id_kelas`, `namakelas`, `walikelas`, `ketuakelas`, `meja`, `gambar_kelas`) VALUES
+(1, 'XI PPLG 3', 1, 1, 40, '1');
+
 -- --------------------------------------------------------
 
 --
@@ -93,6 +101,15 @@ CREATE TABLE `matapelajaran` (
   `namapelajaran` int(11) NOT NULL,
   `namaguru` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `matapelajaran`
+--
+
+INSERT INTO `matapelajaran` (`idpelajaran`, `namapelajaran`, `namaguru`) VALUES
+(1, 1, 1),
+(2, 2, 2),
+(3, 3, 3);
 
 -- --------------------------------------------------------
 
@@ -112,7 +129,8 @@ CREATE TABLE `peminjaman` (
 --
 
 INSERT INTO `peminjaman` (`id_peminjaman`, `id_pengguna`, `tanggal_pinjam`, `tanggal_kembali`) VALUES
-(1, 1, '2024-02-13', '2024-02-13');
+(1, 1, '2024-02-13', '2024-02-20'),
+(2, 2, '2024-03-20', '2024-02-29');
 
 -- --------------------------------------------------------
 
@@ -179,7 +197,7 @@ CREATE TABLE `siswa` (
   `nama` varchar(100) DEFAULT NULL,
   `alamat` varchar(100) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
-  `nohp` varchar(20) DEFAULT NULL,
+  `no_hp` varchar(20) DEFAULT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -187,8 +205,9 @@ CREATE TABLE `siswa` (
 -- Dumping data for table `siswa`
 --
 
-INSERT INTO `siswa` (`idsiswa`, `nama`, `alamat`, `email`, `nohp`, `id_user`) VALUES
-(1, 'Enno', 'Griya KPN', 'tevirchan@gmail.com', '082388310607', 1);
+INSERT INTO `siswa` (`idsiswa`, `nama`, `alamat`, `email`, `no_hp`, `id_user`) VALUES
+(1, 'Enno Nurwansyah Rasyidi', 'Griya Kpn', 'kanekitouru2@gmail.com', '082388310607', 1),
+(2, 'M.Naafi Hafidzh', 'Tanjung Pinang', 'mnaafi@gmail.com', '081534478244', 2);
 
 -- --------------------------------------------------------
 
@@ -235,7 +254,9 @@ ALTER TABLE `kelas`
 -- Indexes for table `matapelajaran`
 --
 ALTER TABLE `matapelajaran`
-  ADD PRIMARY KEY (`idpelajaran`);
+  ADD PRIMARY KEY (`idpelajaran`),
+  ADD KEY `namaguru` (`namaguru`),
+  ADD KEY `namapelajaran` (`namapelajaran`);
 
 --
 -- Indexes for table `peminjaman`
@@ -290,25 +311,25 @@ ALTER TABLE `guru`
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `matapelajaran`
 --
 ALTER TABLE `matapelajaran`
-  MODIFY `idpelajaran` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idpelajaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `peminjaman`
 --
 ALTER TABLE `peminjaman`
-  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `idsiswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idsiswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -321,24 +342,29 @@ ALTER TABLE `users`
 --
 
 --
+-- Constraints for table `matapelajaran`
+--
+ALTER TABLE `matapelajaran`
+  ADD CONSTRAINT `matapelajaran_ibfk_1` FOREIGN KEY (`namaguru`) REFERENCES `guru` (`id`);
+
+--
 -- Constraints for table `peminjaman`
 --
 ALTER TABLE `peminjaman`
-  ADD CONSTRAINT `peminjaman_ibfk_1` FOREIGN KEY (`id_pengguna`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `peminjaman_ibfk_1` FOREIGN KEY (`id_peminjaman`) REFERENCES `buku` (`id`),
+  ADD CONSTRAINT `peminjaman_ibfk_2` FOREIGN KEY (`id_pengguna`) REFERENCES `siswa` (`idsiswa`);
 
 --
 -- Constraints for table `peminjaman_buku`
 --
 ALTER TABLE `peminjaman_buku`
-  ADD CONSTRAINT `peminjaman_buku_ibfk_1` FOREIGN KEY (`id_peminjaman`) REFERENCES `peminjaman` (`id_peminjaman`),
-  ADD CONSTRAINT `peminjaman_buku_ibfk_2` FOREIGN KEY (`id_buku`) REFERENCES `buku` (`id`);
+  ADD CONSTRAINT `peminjaman_buku_ibfk_1` FOREIGN KEY (`id_peminjaman`) REFERENCES `peminjaman` (`id_peminjaman`);
 
 --
 -- Constraints for table `pengembalian_buku`
 --
 ALTER TABLE `pengembalian_buku`
-  ADD CONSTRAINT `pengembalian_buku_ibfk_2` FOREIGN KEY (`id_pengembalian`) REFERENCES `peminjaman` (`id_peminjaman`),
-  ADD CONSTRAINT `pengembalian_buku_ibfk_3` FOREIGN KEY (`id_buku`) REFERENCES `buku` (`id`);
+  ADD CONSTRAINT `pengembalian_buku_ibfk_2` FOREIGN KEY (`id_pengembalian`) REFERENCES `peminjaman` (`id_peminjaman`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
