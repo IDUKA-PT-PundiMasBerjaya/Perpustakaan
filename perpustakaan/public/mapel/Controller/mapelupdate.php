@@ -8,8 +8,8 @@
 			$this->kon = $connection;
 		}
 
-		public function updateMapel($idpelajaran, $namapelajaran, $namaguru) {
-			$result = mysqli_query($this->kon, "UPDATE matapelajaran SET namapelajaran = '$namapelajaran', namaguru = '$namaguru' WHERE idpelajaran = '$idpelajaran'");
+		public function updateMapel($idpelajaran, $namapelajaran, $guru_idguru) {
+			$result = mysqli_query($this->kon, "UPDATE matapelajaran SET namapelajaran = '$namapelajaran', guru_idguru = '$guru_idguru' WHERE idpelajaran = '$idpelajaran'");
 
 			if ($result) {
 				return "Sukses meng-update data.";

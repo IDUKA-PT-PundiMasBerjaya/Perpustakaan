@@ -21,6 +21,6 @@
 	if ($mapelData) {
 		$idpelajaran = $mapelData['idpelajaran'];
 		$namapelajaran = $mapelData['namapelajaran'];
-		$namaguru = $mapelData['namaguru'];
+		$guru_idguru = $mapelData['guru_idguru'];
 	}
 ?>

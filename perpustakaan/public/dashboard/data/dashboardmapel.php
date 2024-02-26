@@ -35,7 +35,7 @@
 		<tr>
 			<th> ID Pelajaran </th>
             <th> Nama Pelajaran </th>
-			<th> Nama Guru </th>
+			<th> ID Guru </th>
 			<th> Aksi </th>
 		</tr>
 
@@ -44,11 +44,10 @@
 				echo "<tr>";
 					echo "<td>" . $idpelajaran = $userAmbilData['idpelajaran'] . "</td>";
                     echo "<td>" . $namapelajaran = $userAmbilData['namapelajaran'] . "</td>";
-					echo "<td>" . $namaguru = $userAmbilData['namaguru'] . "</td>";
+					echo "<td>" . $guru_idguru = $userAmbilData['guru_idguru'] . "</td>";
 					echo "<td> 
 							<a href='../../mapel/view/view.php?idpelajaran=" . $userAmbilData['idpelajaran'] . "'> View </a> | 
 							<a href='../../mapel/view/update.php?idpelajaran=" . $userAmbilData['idpelajaran'] . "'> Edit </a> | 
-							<a href='../../mapel/Controller/mapelhapus.php?idpelajaran=" . $userAmbilData['idpelajaran'] ."'> Hapus </a> 
 						</td>";
 				echo "</tr>";
 			}

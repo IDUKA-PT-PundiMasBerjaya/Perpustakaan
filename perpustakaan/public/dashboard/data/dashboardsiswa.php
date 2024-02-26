@@ -50,7 +50,7 @@
 					echo "<td>" . $alamat = $userAmbilData['alamat'] . "</td>";
 					echo "<td>" . $email = $userAmbilData['email'] . "</td>";
                     echo "<td>" . $no_hp = $userAmbilData['no_hp'] . "</td>";
-                    echo "<td>" . $id_user = $userAmbilData['id_user'] . "</td>";
+                    echo "<td>" . $users_id = $userAmbilData['users_id'] . "</td>";
 					echo "<td> 
 							<a href='../../siswa/view/view.php?idsiswa=" . $userAmbilData['idsiswa'] . "'> View </a> | 
 							<a href='../../siswa/view/update.php?idsiswa=" . $userAmbilData['idsiswa'] . "'> Edit </a> | 

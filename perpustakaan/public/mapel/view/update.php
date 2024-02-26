@@ -7,8 +7,8 @@
 	if (isset($_POST['update'])) {
 		$idpelajaran = $_POST['idpelajaran'];
 		$namapelajaran = $_POST['namapelajaran'];
-		$namaguru = $_POST['namaguru'];
-		$message = $mapelController->updateMapel($idpelajaran, $namapelajaran, $namaguru);
+		$guru_idguru = $_POST['guru_idguru'];
+		$message = $mapelController->updateMapel($idpelajaran, $namapelajaran, $guru_idguru);
 		echo $message;
 
 		header("Location: ../../dashboard/data/dashboardmapel.php");
@@ -16,7 +16,7 @@
 
 	$idpelajaran = null;
 	$namapelajaran = null;
-	$namaguru = null;
+	$guru_idguru = null;
 
 	if (isset($_GET['idpelajaran']) && is_numeric($_GET['idpelajaran'])) {
 		$idpelajaran = $_GET['idpelajaran'];
@@ -25,7 +25,7 @@
 		if ($result) {
 			$idpelajaran = $result['idpelajaran'];
 			$namapelajaran = $result['namapelajaran'];
-			$namaguru = $result['namaguru'];
+			$guru_idguru = $result['guru_idguru'];
 		} else{
 			echo "ID Tidak Valid.";
 		}
@@ -51,8 +51,8 @@
 				<td><input class="input" type="text" name="namapelajaran" value="<?php echo $namapelajaran ?>"></td>
 			</tr>
 			<tr>
-				<td>Nama Guru</td>
-				<td><input class="input" type="text" name="namaguru" value="<?php echo $namaguru; ?>"></td>
+				<td>ID Guru</td>
+				<td><input class="input" type="text" name="guru_idguru" value="<?php echo $guru_idguru; ?>"></td>
 			</tr>
 			<tr>
 				<td><input type="hidden" name="idpelajaran" value="<?php echo $idpelajaran; ?>"></td>

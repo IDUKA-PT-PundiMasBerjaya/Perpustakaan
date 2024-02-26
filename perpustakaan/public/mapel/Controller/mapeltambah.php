@@ -23,9 +23,9 @@
 		public function tambahDataMapel($data) {
 			$idpelajaran = $data['idpelajaran'];
 			$namapelajaran = $data['namapelajaran'];
-			$namaguru = $data['namaguru'];
+			$guru_idguru = $data['guru_idguru'];
 
-					$insertData = mysqli_query($this->kon, "INSERT INTO matapelajaran (idpelajaran, namapelajaran, namaguru) VALUES ('$idpelajaran', '$namapelajaran', '$namaguru')");
+					$insertData = mysqli_query($this->kon, "INSERT INTO matapelajaran (idpelajaran, namapelajaran, guru_idguru) VALUES ('$idpelajaran', '$namapelajaran', '$guru_idguru')");
 
 					if ($insertData) {
 						return "Data berhasil disimpan.";

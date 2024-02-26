@@ -9,7 +9,7 @@
 		}
 
 		public function tambahBuku() {
-			$setAuto = mysqli_query($this->kon, "SELECT MAX(id) AS max_id FROM buku");
+			$setAuto = mysqli_query($this->kon, "SELECT MAX(id_buku) AS max_id FROM buku");
 			$result = mysqli_fetch_assoc($setAuto);
 			$max_id = $result['max_id'];
 
@@ -21,7 +21,7 @@
 		}
 
 		public function tambahDataBuku($data) {
-			$id = $data['id'];
+			$id_buku = $data['id_buku'];
             $judul = $data['judul'];
             $penulis = $data['penulis'];
             $keterangan = $data['keterangan'];
@@ -29,7 +29,7 @@
             $gambar = $data['gambar'];
             $matapelajaran_idpelajaran = $data['matapelajaran_idpelajaran'];
 
-					$insertData = mysqli_query($this->kon, "INSERT INTO buku(id, judul, penulis, keterangan, stok, gambar, matapelajaran_idpelajaran ) VALUES ('$id', '$judul', '$penulis', '$keterangan', '$stok', '$gambar', '$matapelajaran_idpelajaran')");
+					$insertData = mysqli_query($this->kon, "INSERT INTO buku(id_buku, judul, penulis, keterangan, stok, gambar, matapelajaran_idpelajaran ) VALUES ('$id_buku', '$judul', '$penulis', '$keterangan', '$stok', '$gambar', '$matapelajaran_idpelajaran')");
 
 					if ($insertData) {
 						return "Data berhasil disimpan.";

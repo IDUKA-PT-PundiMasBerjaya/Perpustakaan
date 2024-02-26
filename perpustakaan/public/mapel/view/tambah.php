@@ -10,11 +10,15 @@
 		$data = [
 			'idpelajaran' => $idpelajaran,
 	  		'namapelajaran' => $_POST['namapelajaran'],
-      		'namaguru' => $_POST['namaguru'],
+      		'guru_idguru' => $_POST['guru_idguru'],
 		];
 
 		$message = $mapelController->tambahDataMapel($data);
 	}
+	
+	//mengambil data guru
+	$dataGuru = "SELECT idguru, nama FROM guru";
+	$hasilGuru = mysqli_query($kon, $dataGuru);
 ?>
 
 <!DOCTYPE html>
@@ -36,8 +40,8 @@
 				<td><input class="input" type="text" name="namapelajaran" required></td>
 			</tr>
 			<tr>
-				<td>Nama Guru</td>
-				<td><input class="input" type="text" name="namaguru" required></td>
+				<td>ID Guru</td>
+				<td><input class="input" type="text" name="guru_idguru" required></td>
 			</tr>
 		</table>
 		<input type="submit" name="submit" value="Tambah Data">

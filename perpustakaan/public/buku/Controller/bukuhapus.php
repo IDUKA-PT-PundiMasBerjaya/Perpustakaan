@@ -8,8 +8,8 @@
 			$this->kon = $connection;
 		}
 
-		public function deleteBuku($id) {
-			$deletedata = mysqli_query($this->kon, "DELETE FROM buku WHERE id = '$id'");
+		public function deleteBuku($id_buku) {
+			$deletedata = mysqli_query($this->kon, "DELETE FROM buku WHERE id_buku = '$id_buku'");
 
 			if ($deletedata) {
 				return "Data sukses terhapus.";
@@ -20,9 +20,9 @@
 	}
 
 	$kelasController = new BukuController($kon);
-	if (isset($_GET['id'])) {
-		$id = $_GET['id'];
-		$message = $kelasController->deleteBuku($id);
+	if (isset($_GET['id_buku'])) {
+		$id_buku = $_GET['id_buku'];
+		$message = $kelasController->deleteBuku($id_buku);
 		echo $message;
 		header("Location: ../../dashboard/data/dashboardbuku.php");
 	}

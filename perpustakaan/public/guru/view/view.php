@@ -18,12 +18,12 @@
 			<tr>
 				<td>ID Guru </td>
 				<td>: </td>
-				<td><?php echo $id; ?></td>
+				<td><?php echo $idguru; ?></td>
 			</tr>
 			<tr>
 				<td>Nama Guru </td>
 				<td>: </td>
-				<td><?php echo $namaguru; ?></td>
+				<td><?php echo $nama; ?></td>
 			</tr>
 			<tr>
 				<td>Alamat Guru </td>

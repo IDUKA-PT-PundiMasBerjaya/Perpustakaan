@@ -8,19 +8,19 @@
 			$this->kon = $connection;
 		}
 
-		public function getGuruData($id) {
-			$result =  mysqli_query($this->kon, "SELECT * FROM guru WHERE id = '$id'");
+		public function getGuruData($idguru) {
+			$result =  mysqli_query($this->kon, "SELECT * FROM guru WHERE idguru = '$idguru'");
 			return mysqli_fetch_array($result);
 		}
 	}
 
 	$kelasController = new GuruController($kon);
-	$id = $_GET['id'];
-	$guruData = $kelasController->getGuruData($id);
+	$idguru = $_GET['idguru'];
+	$guruData = $kelasController->getGuruData($idguru);
 
 	if ($guruData) {
-		$id = $guruData['id'];
-		$namaguru = $guruData['namaguru'];
+		$idguru = $guruData['idguru'];
+		$nama = $guruData['nama'];
 		$alamat = $guruData['alamat'];
 		$email = $guruData['email'];
 		$no_hp = $guruData['no_hp'];

@@ -13,7 +13,7 @@
       		'alamat' => $_POST['alamat'],
       		'email' => $_POST['email'],
       		'no_hp' => $_POST['no_hp'],
-	  		'id_user' => $_POST['id_user']
+	  		'users_id' => $_POST['users_id']
 		];
 
 		$message = $siswaController->tambahDataSiswa($data);
@@ -52,7 +52,7 @@
 			</tr>
 			<tr>
 				<td>ID User</td>
-				<td><input class="input" type="text" name="id_user" required></td>
+				<td><input class="input" type="text" name="users_id" required></td>
 			</tr>
 		</table>
 		<input type="submit" name="submit" value="Tambah Data">

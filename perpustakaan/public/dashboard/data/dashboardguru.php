@@ -26,9 +26,9 @@
 			<?php  
 				if (isset($_GET['cari'])) {
 					$cari = $_GET['cari'];
-					$ambildata = mysqli_query($kon, "SELECT * FROM guru WHERE id LIKE '%".$cari."%' OR namaguru LIKE '%".$cari."%'");
+					$ambildata = mysqli_query($kon, "SELECT * FROM guru WHERE idguru LIKE '%".$cari."%' OR namaguru LIKE '%".$cari."%'");
 				} else {
-					$ambildata = mysqli_query($kon, "SELECT * FROM guru ORDER BY id ASC ");
+					$ambildata = mysqli_query($kon, "SELECT * FROM guru ORDER BY idguru ASC ");
 					$num = mysqli_num_rows($ambildata);
 				}
 			?>
@@ -44,14 +44,14 @@
 		<?php  
 			while ($userAmbilData = mysqli_fetch_array($ambildata)) {
 				echo "<tr>";
-					echo "<td>" . $id = $userAmbilData['id'] . "</td>";
-					echo "<td>" . $namaguru = $userAmbilData['namaguru'] . "</td>";
+					echo "<td>" . $idguru = $userAmbilData['idguru'] . "</td>";
+					echo "<td>" . $nama = $userAmbilData['nama'] . "</td>";
 					echo "<td>" . $alamat = $userAmbilData['alamat'] . "</td>";
 					echo "<td>" . $email = $userAmbilData['email'] . "</td>";
                     echo "<td>" . $no_hp = $userAmbilData['no_hp'] . "</td>";
 					echo "<td> 
-							<a href='../../guru/view/view.php?id=" . $userAmbilData['id'] . "'> View </a> | 
-							<a href='../../guru/view/update.php?id=" . $userAmbilData['id'] . "'> Edit </a> | 
+							<a href='../../guru/view/view.php?idguru=" . $userAmbilData['idguru'] . "'> View </a> | 
+							<a href='../../guru/view/update.php?idguru=" . $userAmbilData['idguru'] . "'> Edit </a> | 
 						</td>";
 				echo "</tr>";
 			}

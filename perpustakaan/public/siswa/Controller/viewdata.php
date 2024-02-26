@@ -24,6 +24,6 @@
 		$alamat = $siswaData['alamat'];
 		$email = $siswaData['email'];
 		$no_hp = $siswaData['no_hp'];
-		$id_user = $siswaData['id_user'];
+		$users_id = $siswaData['users_id'];
 	}
 ?>

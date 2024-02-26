@@ -18,7 +18,7 @@
 			<tr>
 				<td>ID Buku</td>
 				<td>: </td>
-				<td><?php echo $id; ?></td>
+				<td><?php echo $id_buku; ?></td>
 			</tr>
             <tr>
                 <td>Judul</td>

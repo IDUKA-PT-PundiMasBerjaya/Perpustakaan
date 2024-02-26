@@ -5,11 +5,11 @@
 	$guruController = new GuruController($kon);
 
 	if (isset($_POST['submit'])) {
-		$id = $guruController->tambahGuru();
+		$idguru = $guruController->tambahGuru();
 
 		$data = [
-			'id' => $id,
-      		'namaguru' => $_POST['namaguru'],
+			'idguru' => $idguru,
+      		'nama' => $_POST['nama'],
       		'alamat' => $_POST['alamat'],
       		'email' => $_POST['email'],
       		'no_hp' => $_POST['no_hp'],
@@ -31,11 +31,11 @@
 			<table border="1">
 			<tr>
 				<td>ID Guru</td>
-				<td><input class="input_data_1" type="text" name="id" value="<?php echo($guruController->tambahGuru()) ?>" readonly></td>
+				<td><input class="input_data_1" type="text" name="idguru" value="<?php echo($guruController->tambahGuru()) ?>" readonly></td>
 			</tr>
 			<tr>
 				<td>Nama Guru</td>
-				<td><input class="input" type="text" name="namaguru" required></td>
+				<td><input class="input" type="text" name="nama" required></td>
 			</tr>
 			<tr>
 				<td>Alamat</td>
@@ -46,7 +46,7 @@
 				<td><input class="input" type="text" name="email" required></td>
 			</tr>
 			<tr>
-				<td>No HP</td>
+				<td>No. HP</td>
 				<td><input class="input" type="text" name="no_hp" required></td>
 			</tr>
 		</table>

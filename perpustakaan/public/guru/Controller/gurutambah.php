@@ -7,9 +7,8 @@
 		public function __construct($connection) {
 			$this->kon = $connection;
 		}
-
 		public function tambahGuru() {
-			$setAuto = mysqli_query($this->kon, "SELECT MAX(id) AS max_id FROM guru");
+			$setAuto = mysqli_query($this->kon, "SELECT MAX(idguru) AS max_id FROM guru");
 			$result = mysqli_fetch_assoc($setAuto);
 			$max_id = $result['max_id'];
 
@@ -21,13 +20,13 @@
 		}
 
 		public function tambahDataGuru($data) {
-			$id = $data['id'];
-			$namaguru = $data['namaguru'];
+			$idguru = $data['idguru'];
+			$nama = $data['nama'];
 			$alamat = $data['alamat'];
 			$email = $data['email'];
 			$no_hp = $data['no_hp'];
 
-					$insertData = mysqli_query($this->kon, "INSERT INTO guru(id, namaguru, alamat, email, no_hp) VALUES ('$id', '$namaguru', '$alamat', '$email', '$no_hp')");
+					$insertData = mysqli_query($this->kon, "INSERT INTO guru(idguru, nama, alamat, email, no_hp) VALUES ('$idguru', '$nama', '$alamat', '$email', '$no_hp')");
 
 					if ($insertData) {
 						return "Data berhasil disimpan.";

@@ -10,9 +10,9 @@
 		$alamat = $_POST['alamat'];
 		$email = $_POST['email'];
 		$no_hp = $_POST['no_hp'];
-		$id_user = $_POST['id_user'];
+		$users_id= $_POST['users_id'];
 
-		$message = $siswaController->updateSiswa($idsiswa, $nama, $alamat, $email, $no_hp, $id_user);
+		$message = $siswaController->updateSiswa($idsiswa, $nama, $alamat, $email, $no_hp, $users_id);
 		echo $message;
 
 		header("Location: ../../dashboard/data/dashboardsiswa.php");
@@ -23,7 +23,7 @@
 	$alamat = null;
 	$email = null;
 	$no_hp = null;
-	$id_user = null; 
+	$users_id= null; 
 
 	if (isset($_GET['idsiswa']) && is_numeric($_GET['idsiswa'])) {
 		$idsiswa = $_GET['idsiswa'];
@@ -35,7 +35,7 @@
 			$alamat = $result['alamat'];
 			$email = $result['email'];
 			$no_hp = $result['no_hp'];
-			$id_user = $result['id_user'];
+			$users_id= $result['users_id'];
 		} else{
 			echo "ID Tidak Valid.";
 		}
@@ -74,7 +74,7 @@
 			</tr>
 			<tr>
 				<td>ID User</td>
-				<td><input class="input" type="text" name="id_user" value="<?php echo $id_user; ?>"></td>
+				<td><input class="input" type="text" name="users_id" value="<?php echo $users_id; ?>"></td>
 			</tr>
 			<tr>
 				<td><input type="hidden" name="idsiswa" value="<?php echo $idsiswa; ?>"></td>

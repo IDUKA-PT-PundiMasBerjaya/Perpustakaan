@@ -26,9 +26,9 @@
 				<td><?php echo $namapelajaran; ?></td>
 			</tr>
 			<tr>
-				<td>Nama Guru </td>
+				<td>ID Guru </td>
 				<td>: </td>
-				<td><?php echo $namaguru; ?></td>
+				<td><?php echo $guru_idguru; ?></td>
 			</tr>
 		</table>
 	</form>

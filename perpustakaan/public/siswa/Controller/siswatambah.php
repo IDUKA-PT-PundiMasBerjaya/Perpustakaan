@@ -26,9 +26,9 @@
 			$alamat = $data['alamat'];
 			$email = $data['email'];
 			$no_hp = $data['no_hp'];
-			$id_user = $data['id_user'];
+			$users_id = $data['users_id'];
 
-					$insertData = mysqli_query($this->kon, "INSERT INTO siswa(idsiswa, nama, alamat, email, no_hp, id_user) VALUES ('$idsiswa', '$nama', '$alamat', '$email', '$no_hp', '$id_user')");
+					$insertData = mysqli_query($this->kon, "INSERT INTO siswa(idsiswa, nama, alamat, email, no_hp, users_id) VALUES ('$idsiswa', '$nama', '$alamat', '$email', '$no_hp', '$users_id')");
 
 					if ($insertData) {
 						return "Data berhasil disimpan.";

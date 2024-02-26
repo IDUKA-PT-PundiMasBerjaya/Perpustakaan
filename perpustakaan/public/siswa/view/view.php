@@ -43,7 +43,7 @@
 			<tr>
 				<td>ID User </td>
 				<td>: </td>\
-				<td><?php echo $id_user; ?></td>
+				<td><?php echo $users_id; ?></td>
 			</tr>
 		</table>
 	</form>

@@ -5,31 +5,31 @@
 	$guruController = new GuruController($kon);
 
 	if (isset($_POST['update'])) {
-		$id = $_POST['id'];
-		$namaguru = $_POST['namaguru'];
+		$idguru = $_POST['idguru'];
+		$nama = $_POST['nama'];
 		$alamat = $_POST['alamat'];
 		$email = $_POST['email'];
 		$no_hp = $_POST['no_hp'];
 
-		$message = $guruController->updateGuru($id, $namaguru, $alamat, $email, $no_hp);
+		$message = $guruController->updateGuru($idguru, $nama, $alamat, $email, $no_hp);
 		echo $message;
 
 		header("Location: ../../dashboard/data/dashboardguru.php");
 	}
 
-	$id = null;
-	$namaguru = null;
+	$idguru = null;
+	$nama = null;
 	$alamat = null;
 	$email = null;
 	$no_hp = null;
 
-	if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-		$id = $_GET['id'];
-		$result = $guruController->getDataGuru($id);
+	if (isset($_GET['idguru']) && is_numeric($_GET['idguru'])) {
+		$idguru = $_GET['idguru'];
+		$result = $guruController->getDataGuru($idguru);
 
 		if ($result) {
-			$id = $result['id'];
-			$namaguru = $result['namaguru'];
+			$idguru = $result['idguru'];
+			$nama = $result['nama'];
 			$alamat = $result['alamat'];
 			$email = $result['email'];
 			$no_hp = $result['no_hp'];
@@ -51,11 +51,11 @@
 		<table border="1">
 			<tr>
 				<td>ID</td>
-				<td><input class="input_data_1" type="text" name="id" value="<?php echo $id ?>" readonly></td>
+				<td><input class="input_data_1" type="text" name="idguru" value="<?php echo $idguru ?>" readonly></td>
 			</tr>
 			<tr>
 				<td>Nama Guru</td>
-				<td><input class="input" type="text" name="namaguru" value="<?php echo $namaguru; ?>"></td>
+				<td><input class="input" type="text" name="nama" value="<?php echo $nama; ?>"></td>
 			</tr>
 			<tr>
 				<td>Alamat</td>
@@ -70,7 +70,7 @@
 				<td><input class="input" type="text" name="no_hp" value="<?php echo $no_hp; ?>"></td>
 			</tr>
 			<tr>
-				<td><input type="hidden" name="id" value="<?php echo $id; ?>"></td>
+				<td><input type="hidden" name="idguru" value="<?php echo $idguru; ?>"></td>
 				<td><input type="submit" name="update" value="Update"></td>
 			</tr>
 		</table>
