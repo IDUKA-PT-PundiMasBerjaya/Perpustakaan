@@ -1,51 +1,35 @@
 <?php  
 	include_once("../../../config/koneksi.php");
-	include_once("../Controller/siswaupdate.php");
+	include_once("../Controller/pinjambuku.php");
+ 
+	$pinjamController = new PinjamController($kon);
 
-	$siswaController = new SiswaController($kon);
+	if (isset($_POST['submit'])) {
+		$id_peminjaman = $pinjamController->tambahPinjam();
 
-	if (isset($_POST['update'])) {
-		$idsiswa = $_POST['idsiswa'];
-		$nama = $_POST['nama'];
-		$alamat = $_POST['alamat'];
-		$email = $_POST['email'];
-		$no_hp = $_POST['no_hp'];
-		$users_id= $_POST['users_id'];
+		$data = [
+			'id_peminjaman' => $id_peminjaman,
+      		'jumlah_buku' => $_POST['jumlah_buku'],
+      		'buku_id_buku' => $_POST['buku_id_buku'],
+		];
 
-		$message = $siswaController->updateSiswa($idsiswa, $nama, $alamat, $email, $no_hp, $users_id);
-		echo $message;
-
-		header("Location: ../../dashboard/data/dashboardsiswa.php");
+		$message = $pinjamController->tambahDataPinjam($data);
 	}
+    // Inner join antara tabel buku dengan tabel matapelajaran
+    $query = "SELECT id_peminjaman, jumlah_buku, judul 
+              FROM buku
+              INNER JOIN peminjaman_buku ON buku_id_buku = id_buku";
 
-	$idsiswa = null;
-	$nama = null;
-	$alamat = null;
-	$email = null;
-	$no_hp = null;
-	$users_id= null; 
+    $result = mysqli_query($kon, $query);
 
-	if (isset($_GET['idsiswa']) && is_numeric($_GET['idsiswa'])) {
-		$idsiswa = $_GET['idsiswa'];
-		$result = $siswaController->getDataSiswa($idsiswa);
-
-		if ($result) {
-			$idsiswa = $result['idsiswa'];
-			$nama = $result['nama'];
-			$alamat = $result['alamat'];
-			$email = $result['email'];
-			$no_hp = $result['no_hp'];
-			$users_id= $result['users_id'];
-		} else{
-			echo "ID Tidak Valid.";
-		}
-	}
+    $dataPinjam = "SELECT id_buku, judul FROM Buku";
+	$hasilPinjam = mysqli_query($kon, $dataPinjam);
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Halaman Update Siswa</title>
+	<title>Peminjaman Buku</title>
 	<link rel="stylesheet" href="../../css/output.css">
     <style>
         /* Style untuk judul tabel */
@@ -152,62 +136,48 @@
         /* Style untuk sel yang sejajar dengan ID Buku */
         td:first-child,
         td:nth-child(2),
-        td:nth-child(3),
-        td:nth-child(4),
-        td:nth-child(5),
-        td:nth-child(6),
-        td:nth-child(7) {
+        td:nth-child(3) {
             color: #020617; /* Warna teks Hitam */
         }
-        /* Style untuk tombol update */
-        .update-button {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .update-button input[type=submit] {
-            width: auto; /* Mengembalikan lebar tombol ke ukuran default */
-        }
     </style>
-</head>
-<body class="bg-gray-100">
-    <div class="container mx-auto py-4"> 
-	<h1>Update Data Siswa</h1>
-	<nav>
-        <a href="../../dashboard/data/dashboardsiswa.php">Home</a>
-    </nav>
-	<form action="update.php" method="POST", name="update", enctype="multipart/form-data">
-		<table border="1">
-			<tr>
-				<td>ID Siswa</td>
-				<td><input class="input_data_1" type="text" name="idsiswa" value="<?php echo $idsiswa ?>" readonly></td>
-			</tr>
-			<tr>
-				<td>Nama Siswa</td>
-				<td><input class="input" type="text" name="nama" value="<?php echo $nama; ?>"></td>
-			</tr>
-			<tr>
-				<td>Alamat</td>
-				<td><input class="input" type="text" name="alamat" value="<?php echo $alamat; ?>"></td>
-			</tr>
-			<tr>
-				<td>Email</td>
-				<td><input class="input" type="text" name="email" value="<?php echo $email; ?>"></td>
-			</tr>
-			<tr>
-				<td>No HP</td>
-				<td><input class="input" type="text" name="no_hp" value="<?php echo $no_hp; ?>"></td>
-			</tr>
-			<tr>
-				<td>ID User</td>
-				<td><input class="input" type="text" name="users_id" value="<?php echo $users_id; ?>"></td>
-			</tr>
-		</table>
-		<div class="update-button">
-            <input type="hidden" name="idsiswa" value="<?php echo $idsiswa; ?>">
-            <input type="submit" name="update" value="Update">
-        </div>
+	</head>
+	<body class="bg-gray-100">
+    	<div class="container mx-auto py-4"> <!-- Padding atas dan bawah sedikit diperkecil -->
+		<h1>Mau Meminjam Berapa Buku ?</h1>
+			<nav>
+            	<a href="../../dashboard/data/dashboardbuku.php">Home</a>
+        	</nav>
+			<form action="tambah.php" method="POST", name="tambah", enctype="multipart/form-data">
+				<table border="1">
+				<tr>
+					<td>ID Peminjaman</td>
+					<td><input class="input" type="text" name="id_peminjaman" required></td>
+				</tr>
+				<tr>
+					<td>Jumlah Buku</td>
+					<td><input class="input" type="int" name="jumlah_buku" required></td>
+				</tr>
+				<tr>
+	            <td>Judul Buku</td>
+	            <td>
+                    <select id="buku_id_buku" name="buku_id_buku" style="width :100%">
+                        <?php if (mysqli_num_rows($hasilPinjam) > 0) : ?>
+                        <option value ="" disabled selected>Pilih ID Buku</option> <?php while ($row = mysqli_fetch_assoc($hasilPinjam)) : ?>
+                        <option value ="<?php echo $row ['id_buku']; ?>"> <?php echo $row['id_buku'] . ' . ' . $row['judul']; ?></option>
+                        <?php endwhile; ?>
+                        <?php else : ?>
+                        <option value ="" disabled selected>Tambahkan Data Buku terlebih Dahulu, Jika belum Ada </option>
+                        <?php endif; ?>
+		             </select>
+	            </td>
+            </tr>
+			</table>
+			<input type="submit" name="submit" value="Pinjam">
+			<?php  if (isset($message)): ?>
+				<div class="success-message">
+					<?php echo $message; ?>
+				</div>
+			<?php endif; ?>
 	</form>
-	</div>
 </body>
 </html>

@@ -26,16 +26,36 @@
             $penulis = $data['penulis'];
             $keterangan = $data['keterangan'];
             $stok = $data['stok'];
-            $gambar = $data['gambar'];
             $matapelajaran_idpelajaran = $data['matapelajaran_idpelajaran'];
 
-					$insertData = mysqli_query($this->kon, "INSERT INTO buku(id_buku, judul, penulis, keterangan, stok, gambar, matapelajaran_idpelajaran ) VALUES ('$id_buku', '$judul', '$penulis', '$keterangan', '$stok', '$gambar', '$matapelajaran_idpelajaran')");
+			//Menambahkan Gambar
+			$ekstensi_diperbolehkan = array('jpeg', 'jpg', 'png');
+			$namagambar = $_FILES['gambar']['name'];
+			$x = explode('.', $namagambar);
+			$ekstensi = strtolower(end($x));
+			$ukuran = $_FILES['gambar']['size'];
+			$file_temp = $_FILES['gambar']['tmp_name'];
+
+			if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
+				if ($ukuran <= 2000000) {
+					move_uploaded_file($file_temp, '../aset/' . $namagambar);
+					$insertData = mysqli_query($this->kon, "INSERT INTO buku (id_buku, judul, penulis, keterangan, stok, gambar, matapelajaran_idpelajaran) VALUES ('$id_buku', '$judul', '$penulis', '$keterangan', '$stok', '$namagambar', '$matapelajaran_idpelajaran')");
 
 					if ($insertData) {
 						return "Data berhasil disimpan.";
 					} else {
 						return "Gagal menyimpan data.";
 					}
+				} else {
+					echo "<div style:'color: red;'>
+							Ukuran file terlalu besar! Silahkan pilih file yang lebih kecil. 
+						</div>";
+				}
+			} else {
+				echo "<div style:'color: red;'>
+						Ekstensi file yang diupload tidak diizinkan!
+					</div>";
+			}
 
 		}
 	}

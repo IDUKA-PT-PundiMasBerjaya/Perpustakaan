@@ -14,7 +14,7 @@
 	$pdf->Cell(20, 7, 'ID Guru', 1, 0, 'C');
 	$pdf->Cell(30, 7, 'Nama Guru', 1, 0, 'C');
 	$pdf->Cell(80, 7, 'Alamat', 1, 0, 'C');
-	$pdf->Cell(30, 7, 'Email', 1, 0, 'C');
+	$pdf->Cell(40, 7, 'Email', 1, 0, 'C');
 	$pdf->Cell(30, 7, 'No. HP', 1, 0, 'C');
 
     $pdf->Cell(10, 7, '', 0, 1);
@@ -27,7 +27,7 @@
 		$pdf->Cell(20, 6, $d['idguru'], 1, 0, 'C');
 		$pdf->Cell(30, 6, $d['nama'], 1, 0, 'C');
 		$pdf->Cell(80, 6, $d['alamat'], 1, 0, 'C');
-		$pdf->Cell(30, 6, $d['email'], 1, 0, 'C');
+		$pdf->Cell(40, 6, $d['email'], 1, 0, 'C');
 		$pdf->Cell(30, 6, $d['no_hp'], 1, 0, 'C');
 		$pdf->Ln();
 	}

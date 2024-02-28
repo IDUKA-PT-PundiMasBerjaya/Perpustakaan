@@ -21,9 +21,11 @@
 	if ($kelasData) {
 		$id_kelas = $kelasData['id_kelas'];
 		$namakelas = $kelasData['namakelas'];
-		$walikelas = $kelasData['walikelas'];
 		$ketuakelas = $kelasData['ketuakelas'];
+		$kursi = $kelasData['kursi'];
 		$meja = $kelasData['meja'];
 		$gambar_kelas = $kelasData['gambar_kelas'];
+		$guru_idguru = $kelasData['guru_idguru'];
+		$siswa_idsiswa = $kelasData['siswa_idsiswa'];
 	}
 ?>

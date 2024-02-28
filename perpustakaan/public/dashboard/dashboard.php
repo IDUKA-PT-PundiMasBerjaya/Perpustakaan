@@ -28,7 +28,7 @@
         }
         /* Gaya untuk setiap kotak di dalam navbar */
         .horizontal-navbar {
-            background-color: #f4f4f4; /* Warna latar belakang */
+            background-color: #fff; /* Warna latar belakang */
             padding: 20px;
             border-radius: 8px;
             display: flex; /* Menjadikan navbar horizontal */
@@ -39,7 +39,7 @@
 
         /* Gaya untuk setiap kotak di dalam navbar */
         .nav-box {
-            background-color: #ddd; /* Warna latar belakang abu-abu */
+            background-color: #fca5a5; /* Warna latar belakang Pink */
             padding: 10px 20px; /* Ruang dalam kotak */
             border-radius: 8px; /* Sudut melengkung pada kotak */
             margin-right: 10px; /* Jarak antar kotak */
@@ -69,8 +69,8 @@
         <div class="nav-box"><a href="data/dashboardbuku.php">Data Buku</a></div>
         <div class="nav-box"><a href="data/dashboardmapel.php">Data Mata Pelajaran</a></div>
         <div class="nav-box"><a href="data/dashboardguru.php">Data Guru</a></div>
-        <div class="nav-box"><a href="data/dashboardkelas.php">Data Kelas</a></div>
         <div class="nav-box"><a href="data/dashboardsiswa.php">Data Siswa</a></div>
+        <div class="nav-box"><a href="data/dashboardkelas.php">Data Kelas</a></div>
         <div class="nav-box"><a href="data/dashboardpeminjaman.php">Data Peminjaman</a></div>
         <div class="nav-box"><a href="data/dashboardpengembalian.php">Data Pengembalian</a></div>
     </nav>

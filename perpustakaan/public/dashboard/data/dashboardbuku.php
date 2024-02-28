@@ -140,7 +140,7 @@
 			$cari = $_GET['cari'];
 		}
 	?>
-	<h1> Data Buku </h1>
+	<h1> Buku Buku Yang Tersedia di Perpustkaan </h1>
 		<nav>
 			<div>
 				<a href="../../buku/view/tambah.php" class="btn bg-blue-500 text-white">Tambah Data Buku</a>
@@ -180,10 +180,16 @@
                     echo "<td class='border border-gray-400 px-4 py-2'>" . $penulis =$userAmbilData['penulis'] . "</td>";
                     echo "<td class='border border-gray-400 px-4 py-2'>" . $keterangan = $userAmbilData['keterangan'] . "</td>";
                     echo "<td class='border border-gray-400 px-4 py-2'>" . $stok = $userAmbilData['stok'] . "</td>";
-                    echo "<td class='border border-gray-400 px-4 py-2'>" . $gambar = $userAmbilData['gambar'] . "</td>";
+                    echo "<td class='border border-gray-400 px-4 py-2'>";
+                        $data = mysqli_query($kon, "SELECT * FROM buku WHERE id_buku = '{$userAmbilData['id_buku']}'");
+                        while ($row = mysqli_fetch_array($data)) {
+                            echo "<a href='javascript:void(0);' onclick=\"window.open(../../buku/aset/{$row['gambar']}', '_blank');\">
+                                    <img src='../../buku/aset/{$row['gambar']}' alt='Gambar Buku' width='110' height='150'></a>";
+                        }
+                        "</td>";
                     echo "<td class='border border-gray-400 px-4 py-2'>" . $matapelajaran_idpelajaran = $userAmbilData['matapelajaran_idpelajaran'] . "</td>";
 					echo "<td>
-							<a href='../../pinjam/view/pinjam.php?id_peminjaman=" . $userAmbilData['id_buku'] . "' class='btn btn-pinjam'> Pinjam </a> |  
+							<a href='../../buku/view/pinjam.php?id_peminjaman=" . $userAmbilData['id_buku'] . "' class='btn btn-pinjam'> Pinjam </a> |  
 							<a href='../../buku/view/view.php?id_buku=" . $userAmbilData['id_buku'] . "' class='btn btn-view'> View </a> | 
 							<a href='../../buku/view/update.php?id_buku=" . $userAmbilData['id_buku'] . "' class='btn btn-edit'> Edit </a> | 
 							<a href='../../buku/Controller/bukuhapus.php?id_buku=" . $userAmbilData['id_buku'] ."' class='btn btn-hapus'> Hapus </a> 

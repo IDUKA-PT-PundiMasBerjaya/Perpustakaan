@@ -13,12 +13,20 @@
             'penulis' => $_POST['penulis'],
             'keterangan' => $_POST['keterangan'],
             'stok' => $_POST['stok'],
-            'gambar' => $_POST['gambar'],
             'matapelajaran_idpelajaran' => $_POST['matapelajaran_idpelajaran']
 		];
 
 		$message = $bukuController->tambahDataBuku($data);
 	}
+    // Inner join antara tabel buku dengan tabel matapelajaran
+    $query = "SELECT id_buku, judul, penulis, keterangan, stok, gambar, namapelajaran 
+              FROM buku
+              INNER JOIN matapelajaran ON matapelajaran_idpelajaran = idpelajaran";
+
+    $result = mysqli_query($kon, $query);
+
+    $dataMapel = "SELECT idpelajaran, namapelajaran FROM matapelajaran";
+	$hasilMapel = mysqli_query($kon, $dataMapel);
 ?>
 
 <!DOCTYPE html>
@@ -170,12 +178,22 @@
                 </tr>
                 <tr>
                     <td>Gambar</td>
-                    <td><input type="text" name="gambar" required></td>
+                    <td><input type="file" name="gambar" required></td>
                 </tr>
                 <tr>
-                    <td>ID Pelajaran</td>
-                    <td><input type="text" name="matapelajaran_idpelajaran" required></td>
-                </tr>
+	            <td>Nama Pelajaran</td>
+	            <td>
+                    <select id="matapelajaran_idpelajaran" name="matapelajaran_idpelajaran" style="width :100%">
+                        <?php if (mysqli_num_rows($hasilMapel) > 0) : ?>
+                        <option value ="" disabled selected>Pilih ID Pelajaran</option> <?php while ($row = mysqli_fetch_assoc($hasilMapel)) : ?>
+                        <option value ="<?php echo $row ['idpelajaran']; ?>"> <?php echo $row['idpelajaran'] . ' . ' . $row['namapelajaran']; ?></option>
+                        <?php endwhile; ?>
+                        <?php else : ?>
+                        <option value ="" disabled selected>Tambahkan Data Mata Pelajaran terlebih Dahulu, Jika belum Ada </option>
+                        <?php endif; ?>
+		             </select>
+	            </td>
+            </tr>
             </table>
             <?php if (isset($message)): ?>
                 <div class="success-message">

@@ -1,51 +1,35 @@
 <?php  
 	include_once("../../../config/koneksi.php");
-	include_once("../Controller/siswaupdate.php");
+	include_once("../Controller/pinjamtambah.php");
+ 
+	$pinjamController = new PinjamController($kon);
 
-	$siswaController = new SiswaController($kon);
+	if (isset($_POST['submit'])) {
+		$id_peminjaman = $pinjamController->tambahPinjam();
 
-	if (isset($_POST['update'])) {
-		$idsiswa = $_POST['idsiswa'];
-		$nama = $_POST['nama'];
-		$alamat = $_POST['alamat'];
-		$email = $_POST['email'];
-		$no_hp = $_POST['no_hp'];
-		$users_id= $_POST['users_id'];
+		$data = [
+			'id_peminjaman' => $id_peminjaman,
+      		'tanggal_pinjam' => $_POST['tanggal_pinjam'],
+      		'tanggal_kembali' => $_POST['tanggal_kembali'],
+      		'guru_idguru' => $_POST['guru_idguru'],
+      		'siswa_idsiswa' => $_POST['siswa_idsiswa'],
+		];
 
-		$message = $siswaController->updateSiswa($idsiswa, $nama, $alamat, $email, $no_hp, $users_id);
-		echo $message;
-
-		header("Location: ../../dashboard/data/dashboardsiswa.php");
+		$message = $pinjamController->tambahDataPinjam($data);
 	}
+        // Mengambil Data Siswa
+        $dataSiswa = "SELECT id_siswa, nama FROM Siswa";
+        $hasilSiswa = mysqli_query($kon, $dataSiswa);
 
-	$idsiswa = null;
-	$nama = null;
-	$alamat = null;
-	$email = null;
-	$no_hp = null;
-	$users_id= null; 
-
-	if (isset($_GET['idsiswa']) && is_numeric($_GET['idsiswa'])) {
-		$idsiswa = $_GET['idsiswa'];
-		$result = $siswaController->getDataSiswa($idsiswa);
-
-		if ($result) {
-			$idsiswa = $result['idsiswa'];
-			$nama = $result['nama'];
-			$alamat = $result['alamat'];
-			$email = $result['email'];
-			$no_hp = $result['no_hp'];
-			$users_id= $result['users_id'];
-		} else{
-			echo "ID Tidak Valid.";
-		}
-	}
-?>
+        // Mengambil Data Guru
+        $dataGuru = "SELECT id, namaguru FROM guru";
+        $hasilGuru = mysqli_query($kon, $dataGuru);
+        ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Halaman Update Siswa</title>
+	<title>Halaman Tambah Guru</title>
 	<link rel="stylesheet" href="../../css/output.css">
     <style>
         /* Style untuk judul tabel */
@@ -154,59 +138,38 @@
         td:nth-child(2),
         td:nth-child(3),
         td:nth-child(4),
-        td:nth-child(5),
-        td:nth-child(6),
-        td:nth-child(7) {
+        td:nth-child(5) {
             color: #020617; /* Warna teks Hitam */
         }
-        /* Style untuk tombol update */
-        .update-button {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .update-button input[type=submit] {
-            width: auto; /* Mengembalikan lebar tombol ke ukuran default */
-        }
     </style>
-</head>
-<body class="bg-gray-100">
-    <div class="container mx-auto py-4"> 
-	<h1>Update Data Siswa</h1>
-	<nav>
-        <a href="../../dashboard/data/dashboardsiswa.php">Home</a>
-    </nav>
-	<form action="update.php" method="POST", name="update", enctype="multipart/form-data">
-		<table border="1">
-			<tr>
-				<td>ID Siswa</td>
-				<td><input class="input_data_1" type="text" name="idsiswa" value="<?php echo $idsiswa ?>" readonly></td>
-			</tr>
-			<tr>
-				<td>Nama Siswa</td>
-				<td><input class="input" type="text" name="nama" value="<?php echo $nama; ?>"></td>
-			</tr>
-			<tr>
-				<td>Alamat</td>
-				<td><input class="input" type="text" name="alamat" value="<?php echo $alamat; ?>"></td>
-			</tr>
-			<tr>
-				<td>Email</td>
-				<td><input class="input" type="text" name="email" value="<?php echo $email; ?>"></td>
-			</tr>
-			<tr>
-				<td>No HP</td>
-				<td><input class="input" type="text" name="no_hp" value="<?php echo $no_hp; ?>"></td>
-			</tr>
-			<tr>
-				<td>ID User</td>
-				<td><input class="input" type="text" name="users_id" value="<?php echo $users_id; ?>"></td>
-			</tr>
-		</table>
-		<div class="update-button">
-            <input type="hidden" name="idsiswa" value="<?php echo $idsiswa; ?>">
-            <input type="submit" name="update" value="Update">
-        </div>
+	</head>
+	<body class="bg-gray-100">
+    	<div class="container mx-auto py-4"> <!-- Padding atas dan bawah sedikit diperkecil -->
+		<h1>Tambah Data Peminjam</h1>
+			<nav>
+				<a href="../../dashboard/data/dashboardpeminjaman.php">Home</a>
+			</nav>
+			<form action="tambah.php" method="POST", name="tambah", enctype="multipart/form-data">
+				<table border="1">
+				<tr>
+					<td>ID Peminjam</td>
+					<td><input class="input_data_1" type="text" name="id_peminjaman" value="<?php echo($pinjamController->tambahPinjam()) ?>" readonly></td>
+				</tr>
+				<tr>
+					<td>Tanggal Pinjam</td>
+					<td><input class="input" type="date" name="tanggal_pinjam" required></td>
+				</tr>
+				<tr>
+					<td>Tanggal Kembali</td>
+					<td><input class="input" type="date" name="tanggal_kembali" required></td>
+				</tr>
+                </table>
+			<input type="submit" name="submit" value="Tambah Data">
+			<?php  if (isset($message)): ?>
+				<div class="success-message">
+					<?php echo $message; ?>
+				</div>
+			<?php endif; ?>
 	</form>
 	</div>
 </body>
