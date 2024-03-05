@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 28, 2024 at 03:54 PM
+-- Generation Time: Mar 05, 2024 at 03:36 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -69,7 +69,7 @@ CREATE TABLE `guru` (
 
 INSERT INTO `guru` (`idguru`, `nama`, `alamat`, `email`, `no_hp`) VALUES
 (1, 'Buk Helmidah', 'Piayu', 'helmidah@gmail.com', '+6281935101371'),
-(2, 'Rivet', 'Uknown', 'tevirchan@gmail.com', '+1170320072021'),
+(2, 'Sir Rivet', 'Uknown', 'tevirchan@gmail.com', '+1170320072021'),
 (3, 'Pak Misriyadi', 'Tunas 2', 'misriyadi@gmail.com', '+6285608518902'),
 (4, 'Pak Senu', 'Barelang', 'senu@gmail.com', '+62895631045649'),
 (5, 'Pak Wahid', 'Sagulung', 'wahid@gmail.com', '+6289643200429');
@@ -83,7 +83,6 @@ INSERT INTO `guru` (`idguru`, `nama`, `alamat`, `email`, `no_hp`) VALUES
 CREATE TABLE `kelas` (
   `id_kelas` int(11) NOT NULL,
   `namakelas` varchar(100) NOT NULL,
-  `ketuakelas` int(11) NOT NULL,
   `kursi` int(11) NOT NULL,
   `meja` int(11) NOT NULL,
   `gambar_kelas` varchar(500) NOT NULL,
@@ -95,8 +94,8 @@ CREATE TABLE `kelas` (
 -- Dumping data for table `kelas`
 --
 
-INSERT INTO `kelas` (`id_kelas`, `namakelas`, `ketuakelas`, `kursi`, `meja`, `gambar_kelas`, `guru_idguru`, `siswa_idsiswa`) VALUES
-(1, 'XI PPLG 1', 1, 40, 40, 'IoT.jpeg', 1, 1);
+INSERT INTO `kelas` (`id_kelas`, `namakelas`, `kursi`, `meja`, `gambar_kelas`, `guru_idguru`, `siswa_idsiswa`) VALUES
+(1, 'XI PPLG 1', 40, 40, 'IoT.jpeg', 1, 1);
 
 -- --------------------------------------------------------
 

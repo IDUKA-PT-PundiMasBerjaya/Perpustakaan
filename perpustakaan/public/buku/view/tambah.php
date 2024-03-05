@@ -17,14 +17,8 @@
 		];
 
 		$message = $bukuController->tambahDataBuku($data);
-	}
-    // Inner join antara tabel buku dengan tabel matapelajaran
-    $query = "SELECT id_buku, judul, penulis, keterangan, stok, gambar, namapelajaran 
-              FROM buku
-              INNER JOIN matapelajaran ON matapelajaran_idpelajaran = idpelajaran";
-
-    $result = mysqli_query($kon, $query);
-
+    }
+    //inner join tabel Mata Pelajaran
     $dataMapel = "SELECT idpelajaran, namapelajaran FROM matapelajaran";
 	$hasilMapel = mysqli_query($kon, $dataMapel);
 ?>

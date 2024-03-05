@@ -1,46 +1,42 @@
-<?php  
-	include_once("../../../config/koneksi.php");
-	include_once("../Controller/viewdata.php");
+<?php 
+    include_once("../../../config/koneksi.php");
+    include_once("viewdata.php");
 
-	$guruController = new GuruController($kon);
+    $peminjamanController = new PeminjamanController($kon);
 ?>
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>View User Data</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Data Peminjaman</title>
 </head>
 <body>
-	<a href="../../dashboard/data/dashboardguru.php">Home</a>
-	<br><br>
-	<form name="update_data" method="post" action="view.php">
-		<table border="0">
-			<tr>
-				<td>ID Guru </td>
-				<td>: </td>
-				<td><?php echo $idguru; ?></td>
-			</tr>
-			<tr>
-				<td>Nama Guru </td>
-				<td>: </td>
-				<td><?php echo $nama; ?></td>
-			</tr>
-			<tr>
-				<td>Alamat Guru </td>
-				<td>: </td>
-				<td><?php echo $alamat; ?></td>
-			</tr>
-			<tr>
-				<td>Email </td>
-				<td>: </td>
-				<td><?php echo $email; ?></td>
-			</tr>
-			<tr>
-				<td>No HP </td>
-				<td>: </td>
-				<td><?php echo $no_hp; ?></td>
-			</tr>
-		</table>
-	</form>
+    <a href="../../dashboard/data/dspeminjaman.php">| Home |</a>
+    <br><br>
+    <form action="view.php" method="post" name="update_data">
+        <table>
+            <tr>
+                <td>ID Peminjaman</td>
+                <td>: </td>
+                <td><?php echo $id; ?></td>
+            </tr>
+            <tr>
+                <td>Nama Pengguna</td>
+                <td>: </td>
+                <td><?php echo $namapengguna; ?></td>
+            </tr>
+            <tr>
+                <td>Tanggal Pinjam</td>
+                <td>: </td>
+                <td><?php echo $tglpinjam; ?></td>
+            </tr>
+            <tr>
+                <td>Tanggal Kemballi</td>
+                <td>: </td>
+                <td><?php echo $tglkembali; ?></td>
+            </tr>
+        </table>
+    </form>
 </body>
 </html>

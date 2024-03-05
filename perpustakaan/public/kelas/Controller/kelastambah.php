@@ -23,7 +23,6 @@
 		public function tambahDataKelas($data) {
 			$id_kelas = $data['id_kelas'];
 			$namakelas = $data['namakelas'];
-			$ketuakelas = $data['ketuakelas'];
 			$kursi = $data['kursi'];
 			$meja = $data['meja'];
 			$guru_idguru = $data['guru_idguru'];
@@ -40,7 +39,7 @@
 			if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
 				if ($ukuran <= 2000000) {
 					move_uploaded_file($file_temp, '../aset/' . $namagambar);
-					$insertData = mysqli_query($this->kon, "INSERT INTO kelas(id_kelas, namakelas, ketuakelas, kursi, meja, gambar_kelas, guru_idguru, siswa_idsiswa) VALUES ('$id_kelas', '$namakelas', '$ketuakelas', '$kursi', '$meja', '$namagambar', '$guru_idguru', '$siswa_idsiswa')");
+					$insertData = mysqli_query($this->kon, "INSERT INTO kelas(id_kelas, namakelas, kursi, meja, gambar_kelas, guru_idguru, siswa_idsiswa) VALUES ('$id_kelas', '$namakelas', '$kursi', '$meja', '$namagambar', '$guru_idguru', '$siswa_idsiswa')");
 
 					if ($insertData) {
 						return "Data berhasil disimpan.";

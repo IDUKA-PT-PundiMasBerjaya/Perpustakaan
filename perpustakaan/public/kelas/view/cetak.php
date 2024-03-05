@@ -13,12 +13,11 @@
 	$pdf->SetFont('Times', 'B', 9);
 	$pdf->Cell(20, 7, 'ID Kelas', 1, 0, 'C');
 	$pdf->Cell(40, 7, 'Nama Kelas', 1, 0, 'C');
-	$pdf->Cell(40, 7, 'Ketua Kelas', 1, 0, 'C');
 	$pdf->Cell(20, 7, 'Kursi', 1, 0, 'C');
 	$pdf->Cell(20, 7, 'Meja', 1, 0, 'C');
 	$pdf->Cell(40, 7, 'Gambar Kelas', 1, 0, 'C');
-    $pdf->Cell(20, 7, 'ID Guru', 1, 0, 'C');
-    $pdf->Cell(20, 7, 'ID Siswa', 1, 0, 'C');
+    $pdf->Cell(20, 7, 'Wali Guru', 1, 0, 'C');
+    $pdf->Cell(20, 7, 'Ketua Kelas', 1, 0, 'C');
 
     $pdf->Cell(10, 7, '', 0, 1);
 	$pdf->SetFont('Times', '', 10);
@@ -29,7 +28,6 @@
     while ($d = mysqli_fetch_array($data)) {
 		$pdf->Cell(20, 6, $d['id_kelas'], 1, 0, 'C');
 		$pdf->Cell(40, 6, $d['namakelas'], 1, 0, 'C');
-		$pdf->Cell(40, 6, $d['ketuakelas'], 1, 0, 'C');
 		$pdf->Cell(20, 6, $d['kursi'], 1, 0, 'C');
 		$pdf->Cell(20, 6, $d['meja'], 1, 0, 'C');
         $pdf->Cell(40, 6, $d['gambar_kelas'], 1, 0, 'C');

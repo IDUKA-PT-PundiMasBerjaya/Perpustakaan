@@ -19,14 +19,13 @@
 
 		$message = $kelasController->tambahDataKelas($data);
 	}
-
-    // Mengambil Data Siswa
-    $dataSiswa = "SELECT idsiswa, nama FROM Siswa";
-    $hasilSiswa = mysqli_query($kon, $dataSiswa);
-
-    // Mengambil Data Guru
+    //inner join tabel Mata Pelajaran
     $dataGuru = "SELECT idguru, nama FROM guru";
-    $hasilGuru = mysqli_query($kon, $dataGuru);
+	$hasilGuru = mysqli_query($kon, $dataGuru);
+
+    $dataSiswa = "SELECT idsiswa, nama FROM siswa";
+	$hasilSiswa = mysqli_query($kon, $dataSiswa);
+?>
 ?>
 
 <!DOCTYPE html>
@@ -142,8 +141,7 @@
         td:nth-child(3),
         td:nth-child(4),
         td:nth-child(5),
-        td:nth-child(6),
-        td:nth-child(7) {
+        td:nth-child(6) {
             color: #020617; /* Warna teks Hitam */
         }
     </style>
@@ -165,10 +163,6 @@
 				<td><input class="input" type="text" name="namakelas" required></td>
 			</tr>
 			<tr>
-				<td>Ketua Kelas</td>
-				<td><input class="input" type="text" name="ketuakelas" required></td>
-			</tr>
-			<tr>
 				<td>Kursi</td>
 				<td><input class="input" type="text" name="kursi" required></td>
 			</tr>
@@ -181,7 +175,7 @@
 				<td><input class="input" type="file" name="gambar_kelas" required></td>
 			</tr>
 			<tr>
-	            <td>ID Guru</td>
+	            <td>Nama Guru</td>
 	            <td><select id="guru_idguru" name="guru_idguru" style="width :100%">
 		        <?php if (mysqli_num_rows($hasilGuru) > 0) : ?>
 			    <option value ="" disabled selected>Pilih Nama Guru</option> <?php while ($row = mysqli_fetch_assoc($hasilGuru)) : ?>
@@ -194,7 +188,7 @@
 	            </td>
             </tr>
 			<tr>
-	            <td>ID Siswa</td>
+	            <td>Nama Siswa</td>
 	            <td><select id="siswa_idsiswa" name="siswa_idsiswa" style="width :100%">
 		        <?php if (mysqli_num_rows($hasilSiswa) > 0) : ?>
 			    <option value ="" disabled selected>Pilih Nama Siswa</option> <?php while ($row = mysqli_fetch_assoc($hasilSiswa)) : ?>

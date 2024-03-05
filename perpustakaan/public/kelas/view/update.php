@@ -162,8 +162,7 @@
         td:nth-child(4),
         td:nth-child(5),
         td:nth-child(6),
-        td:nth-child(7),
-		td:nth-child(8) {
+        td:nth-child(7) {
             color: #020617; /* Warna teks Hitam */
         }
         /* Style untuk tombol update */
@@ -194,10 +193,6 @@
 				<td><input class="input" type="text" name="namakelas" value="<?php echo $namakelas; ?>"></td>
 			</tr>
 			<tr>
-				<td>Ketua Kelas</td>
-				<td><input class="input" type="text" name="ketuakelas" value="<?php echo $ketuakelas; ?>"></td>
-			</tr>
-			<tr>
 				<td>Kursi</td>
 				<td><input class="input" type="text" name="kursi" value="<?php echo $kursi; ?>"></td>
 			</tr>
@@ -210,11 +205,11 @@
 				<td><input class="input" type="text" name="gambar_kelas" value="<?php echo $gambar_kelas; ?>"></td>
 			</tr>
 			<tr>
-				<td>ID Guru</td>
+				<td>Wali Kelas</td>
 				<td><input class="input" type="text" name="guru_idguru" value="<?php echo $guru_idguru; ?>"></td>
 			</tr>
 			<tr>
-				<td>ID Siswa</td>
+				<td>Ketua Kelas</td>
 				<td><input class="input" type="text" name="siswa_idsiswa" value="<?php echo $siswa_idsiswa; ?>"></td>
 			</tr>
 		</table>

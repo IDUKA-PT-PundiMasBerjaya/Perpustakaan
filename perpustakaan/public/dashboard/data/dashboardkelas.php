@@ -77,8 +77,7 @@
         th:nth-child(5),
         th:nth-child(6),
         th:nth-child(7),
-		th:nth-child(8),
-		th:nth-child(9) {
+		th:nth-child(8) {
             color: #fff; /* Warna teks putih */
         }
 
@@ -152,21 +151,28 @@
 			<?php  
 				if (isset($_GET['cari'])) {
 					$cari = $_GET['cari'];
-					$ambildata = mysqli_query($kon, "SELECT * FROM kelas WHERE id_kelas LIKE '%".$cari."%' OR namakelas LIKE '%".$cari."%'");
+					$ambildata = mysqli_query($kon, "SELECT kelas.*, guru.nama AS nama_guru, siswa.nama AS nama_siswa
+                                          FROM kelas
+                                          INNER JOIN guru ON kelas.guru_idguru = guru.idguru
+                                          INNER JOIN siswa ON kelas.siswa_idsiswa = siswa.idsiswa
+                                          WHERE kelas.id_kelas LIKE '%".$cari."%' OR kelas.namakelas LIKE '%".$cari."%'");
 				} else {
-					$ambildata = mysqli_query($kon, "SELECT * FROM kelas ORDER BY id_kelas ASC ");
+					$ambildata = mysqli_query($kon, "SELECT kelas.*, guru.nama AS nama_guru, siswa.nama AS nama_siswa
+                                          FROM kelas
+                                          INNER JOIN guru ON kelas.guru_idguru = guru.idguru
+                                          INNER JOIN siswa ON kelas.siswa_idsiswa = siswa.idsiswa 
+                                          ORDER BY kelas.id_kelas ASC ");
 					$num = mysqli_num_rows($ambildata);
 				}
 			?>
 		<tr>
 			<th class="border border-gray-400 px-4 py-2 text-center"> ID Kelas </th>
 			<th class="border border-gray-400 px-4 py-2 text-center"> Nama Kelas </th>
-			<th class="border border-gray-400 px-4 py-2 text-center"> Ketua Kelas  </th>
 			<th class="border border-gray-400 px-4 py-2 text-center"> Kursi </th>
             <th class="border border-gray-400 px-4 py-2 text-center"> Meja </th>
             <th class="border border-gray-400 px-4 py-2 text-center"> Gambar </th>
-			<th class="border border-gray-400 px-4 py-2 text-center"> ID Guru</th>
-			<th class="border border-gray-400 px-4 py-2 text-center"> ID Siswa</th>
+			<th class="border border-gray-400 px-4 py-2 text-center"> Nama Guru</th>
+			<th class="border border-gray-400 px-4 py-2 text-center"> Nama Siswa</th>
 			<th class="border border-gray-400 px-4 py-2 text-center"> Aksi </th>
 		</tr>
 			<tbody>
@@ -175,7 +181,6 @@
 				echo "<tr>";
 					echo "<td class='border border-gray-400 px-4 py-2'>" . $id_kelas = $userAmbilData['id_kelas'] . "</td>";
                     echo "<td class='border border-gray-400 px-4 py-2'>" . $namakelas = $userAmbilData['namakelas'] . "</td>";
-                    echo "<td class='border border-gray-400 px-4 py-2'>" . $ketuakelas = $userAmbilData['ketuakelas'] . "</td>";
 					echo "<td class='border border-gray-400 px-4 py-2'>" . $kursi = $userAmbilData['kursi'] . "</td>";
                     echo "<td class='border border-gray-400 px-4 py-2'>" . $meja = $userAmbilData['meja'] . "</td>";
                     echo "<td class='border border-gray-400 px-4 py-2'>";
@@ -185,8 +190,8 @@
                                     <img src='../../kelas/aset/{$row['gambar_kelas']}' alt='Gambar Kelas' width='110' height='150'></a>";
                         }
                         "</td>";
-					echo "<td class='border border-gray-400 px-4 py-2'>" . $guru_idguru = $userAmbilData['guru_idguru'] . "</td>";
-					echo "<td class='border border-gray-400 px-4 py-2'>" . $siswa_idsiswa = $userAmbilData['siswa_idsiswa'] . "</td>";
+                        echo "<td>" . $userAmbilData['nama_guru'] . "</td>";
+                        echo "<td>" . $userAmbilData['nama_siswa'] . "</td>";
 					echo "<td> 
 							<a href='../../kelas/view/view.php?id_kelas=" . $userAmbilData['id_kelas'] . "' class='btn btn-view'> View </a> | 
 							<a href='../../kelas/view/update.php?id_kelas=" . $userAmbilData['id_kelas'] . "' class='btn btn-edit'> Edit </a> | 

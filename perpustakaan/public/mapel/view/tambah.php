@@ -16,14 +16,8 @@
 		$message = $mapelController->tambahDataMapel($data);
         
 	}
-	// Inner join antara tabel buku dengan tabel matapelajaran
-    $query = "SELECT idpelajaran, namapelajaran, guru_idguru, nama
-              FROM guru
-              INNER JOIN matapelajaran ON guru_idguru = idguru";
+	// Inner join antara tabel guru dengan tabel matapelajaran
 
-    $result = mysqli_query($kon, $query);
-
-	//mengambil data guru
 	$dataGuru = "SELECT idguru, nama FROM guru";
 	$hasilGuru = mysqli_query($kon, $dataGuru);
 ?>

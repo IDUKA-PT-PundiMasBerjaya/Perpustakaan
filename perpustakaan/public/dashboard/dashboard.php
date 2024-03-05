@@ -71,7 +71,8 @@
         <div class="nav-box"><a href="data/dashboardguru.php">Data Guru</a></div>
         <div class="nav-box"><a href="data/dashboardsiswa.php">Data Siswa</a></div>
         <div class="nav-box"><a href="data/dashboardkelas.php">Data Kelas</a></div>
-        <div class="nav-box"><a href="data/dashboardpeminjaman.php">Data Peminjaman</a></div>
+        <div class="nav-box"><a href="data/dspeminjaman.php">Data Peminjaman</a></div>
+        <div class="nav-box"><a href="data/dspeminjamanbuku.php">Data Peminjaman Buku</a></div>
         <div class="nav-box"><a href="data/dashboardpengembalian.php">Data Pengembalian</a></div>
     </nav>
 

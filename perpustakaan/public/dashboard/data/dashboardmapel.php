@@ -147,16 +147,20 @@
 			<?php  
 				if (isset($_GET['cari'])) {
 					$cari = $_GET['cari'];
-					$ambildata = mysqli_query($kon, "SELECT * FROM matapelajaran WHERE idpelajaran LIKE '%".$cari."%' OR namapelajaran LIKE '%".$cari."%'");
+					$ambildata = mysqli_query($kon, "SELECT matapelajaran.*, guru.nama FROM matapelajaran
+                                                    INNER JOIN guru ON matapelajaran.guru_idguru = guru.idguru
+                                                    WHERE matapelajaran.idpelajaran LIKE '%".$cari."%' OR matapelajaran.namapelajaran LIKE '%".$cari."%'");
 				} else {
-					$ambildata = mysqli_query($kon, "SELECT * FROM matapelajaran ORDER BY idpelajaran ASC ");
+					$ambildata = mysqli_query($kon, "SELECT matapelajaran.*, guru.nama FROM matapelajaran
+                                                    INNER JOIN guru ON matapelajaran.guru_idguru = guru.idguru 
+                                                    ORDER BY matapelajaran.idpelajaran ASC");
 					$num = mysqli_num_rows($ambildata);
 				}
 			?>
 		<tr>
 			<th class="border border-gray-400 px-4 py-2 text-center"> ID Pelajaran </th>
             <th class="border border-gray-400 px-4 py-2 text-center"> Nama Pelajaran </th>
-			<th class="border border-gray-400 px-4 py-2 text-center"> ID Guru </th>
+			<th class="border border-gray-400 px-4 py-2 text-center"> Nama Guru </th>
 			<th class="border border-gray-400 px-4 py-2 text-center"> Aksi </th>
 		</tr>
 		<tbody>		
@@ -165,7 +169,7 @@
 				echo "<tr>";
 					echo "<td class='border border-gray-400 px-4 py-2'>" . $idpelajaran = $userAmbilData['idpelajaran'] . "</td>";
                     echo "<td class='border border-gray-400 px-4 py-2'>" . $namapelajaran = $userAmbilData['namapelajaran'] . "</td>";
-					echo "<td class='border border-gray-400 px-4 py-2'>" . $guru_idguru = $userAmbilData['guru_idguru'] . "</td>";
+					echo "<td>" . $guru = $userAmbilData['nama'] . "</td>";
 					echo "<td> 
 							<a href='../../mapel/view/view.php?idpelajaran=" . $userAmbilData['idpelajaran'] . "' class='btn btn-view'  > View </a> | 
 							<a href='../../mapel/view/update.php?idpelajaran=" . $userAmbilData['idpelajaran'] . "' class='btn btn-edit'> Edit </a> |

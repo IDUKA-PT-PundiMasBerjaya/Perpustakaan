@@ -80,12 +80,7 @@
 		th:nth-child(8) {
             color: #fff; /* Warna teks putih */
         }
-
-		/* Warna teks untuk tautan aksi */
-        .btn-pinjam {
-            color: #1a365d; /* Warna biru tua */
-        }
-
+        
         .btn-view {
             color: #38c172; /* Warna hijau muda */
         }
@@ -140,7 +135,7 @@
 			$cari = $_GET['cari'];
 		}
 	?>
-	<h1> Buku Buku Yang Tersedia di Perpustkaan </h1>
+	<h1> Buku Buku Yang Tersedia di Perpustakaan </h1>
 		<nav>
 			<div>
 				<a href="../../buku/view/tambah.php" class="btn bg-blue-500 text-white">Tambah Data Buku</a>
@@ -155,9 +150,15 @@
 			<?php  
 				if (isset($_GET['cari'])) {
 					$cari = $_GET['cari'];
-					$ambildata = mysqli_query($kon, "SELECT * FROM buku WHERE id_buku LIKE '%".$cari."%' OR judul LIKE '%".$cari."%'");
+					$ambildata = mysqli_query($kon, "SELECT buku.*, matapelajaran.namapelajaran FROM buku 
+                                                    INNER JOIN matapelajaran ON buku.matapelajaran_idpelajaran = matapelajaran.idpelajaran 
+                                                    WHERE buku.id_buku LIKE '%".$cari."%' OR buku.judul LIKE '%".$cari."%' OR buku.penulis LIKE '%".$cari."%'");
+
 				} else {
-					$ambildata = mysqli_query($kon, "SELECT * FROM buku ORDER BY id_buku ASC ");
+					$ambildata = mysqli_query($kon, "SELECT buku.*, matapelajaran.namapelajaran FROM buku 
+                                                    INNER JOIN matapelajaran ON buku.matapelajaran_idpelajaran = matapelajaran.idpelajaran 
+                                                    ORDER BY buku.id_buku ASC");
+
 					$num = mysqli_num_rows($ambildata);
 				}
 			?>
@@ -168,7 +169,7 @@
             <th class="border border-gray-400 px-4 py-2 text-center">Keterangan</th>
             <th class="border border-gray-400 px-4 py-2 text-center">Stok</th>
             <th class="border border-gray-400 px-4 py-2 text-center">Gambar</th>
-            <th class="border border-gray-400 px-4 py-2 text-center">ID Pelajaran</th>
+            <th class="border border-gray-400 px-4 py-2 text-center">Nama Pelajaran</th>
             <th class="border border-gray-400 px-4 py-2 text-center">Aksi</th>
         </tr>
 		<tbody>
@@ -187,9 +188,8 @@
                                     <img src='../../buku/aset/{$row['gambar']}' alt='Gambar Buku' width='110' height='150'></a>";
                         }
                         "</td>";
-                    echo "<td class='border border-gray-400 px-4 py-2'>" . $matapelajaran_idpelajaran = $userAmbilData['matapelajaran_idpelajaran'] . "</td>";
+                    echo "<td>" . $matapelajaran = $userAmbilData['namapelajaran'] . "</td>";
 					echo "<td>
-							<a href='../../buku/view/pinjam.php?id_peminjaman=" . $userAmbilData['id_buku'] . "' class='btn btn-pinjam'> Pinjam </a> |  
 							<a href='../../buku/view/view.php?id_buku=" . $userAmbilData['id_buku'] . "' class='btn btn-view'> View </a> | 
 							<a href='../../buku/view/update.php?id_buku=" . $userAmbilData['id_buku'] . "' class='btn btn-edit'> Edit </a> | 
 							<a href='../../buku/Controller/bukuhapus.php?id_buku=" . $userAmbilData['id_buku'] ."' class='btn btn-hapus'> Hapus </a> 

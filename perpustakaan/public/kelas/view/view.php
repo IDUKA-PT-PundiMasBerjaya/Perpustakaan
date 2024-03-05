@@ -26,14 +26,9 @@
 				<td><?php echo $namakelas; ?></td>
 			</tr>
 			<tr>
-				<td>Wali Kelas </td>
+				<td>Kursi </td>
 				<td>: </td>
-				<td><?php echo $walikelas; ?></td>
-			</tr>
-			<tr>
-				<td>Ketua Kelas </td>
-				<td>: </td>
-				<td><?php echo $ketuakelas; ?></td>
+				<td><?php echo $kursi; ?></td>
 			</tr>
 			<tr>
 				<td>Meja </td>
@@ -44,6 +39,16 @@
 				<td>Gambar </td>
 				<td>: </td>
 				<td><?php echo $gambar_kelas; ?></td>
+			</tr>
+			<tr>
+				<td>Wali Kelas </td>
+				<td>: </td>
+				<td><?php echo $guru_idguru; ?></td>
+			</tr>
+			<tr>
+				<td>Ketua Kelas </td>
+				<td>: </td>
+				<td><?php echo $siswa_idsiswa; ?></td>
 			</tr>
 		</table>
 	</form>
