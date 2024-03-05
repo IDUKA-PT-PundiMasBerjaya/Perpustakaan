@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 05, 2024 at 08:31 AM
+-- Generation Time: Mar 05, 2024 at 02:06 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -29,12 +29,12 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `buku` (
   `id_buku` int(11) NOT NULL,
-  `judul` varchar(100) NOT NULL,
-  `penulis` varchar(100) NOT NULL,
-  `keterangan` varchar(100) NOT NULL,
-  `stok` int(11) NOT NULL,
-  `gambar` varchar(100) NOT NULL,
-  `matapelajaran_idpelajaran` int(11) NOT NULL
+  `judul` varchar(100) DEFAULT NULL,
+  `penulis` varchar(100) DEFAULT NULL,
+  `keterangan` varchar(100) DEFAULT NULL,
+  `stok` int(11) DEFAULT NULL,
+  `gambar` varchar(100) DEFAULT NULL,
+  `matapelajaran_idpelajaran` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -57,10 +57,10 @@ INSERT INTO `buku` (`id_buku`, `judul`, `penulis`, `keterangan`, `stok`, `gambar
 
 CREATE TABLE `guru` (
   `idguru` int(11) NOT NULL,
-  `nama` varchar(100) NOT NULL,
-  `alamat` text NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `no_hp` varchar(20) NOT NULL
+  `nama` varchar(255) DEFAULT NULL,
+  `alamat` text DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `no_hp` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -82,12 +82,12 @@ INSERT INTO `guru` (`idguru`, `nama`, `alamat`, `email`, `no_hp`) VALUES
 
 CREATE TABLE `kelas` (
   `id_kelas` int(11) NOT NULL,
-  `namakelas` varchar(100) NOT NULL,
-  `kursi` int(11) NOT NULL,
-  `meja` int(11) NOT NULL,
-  `gambar_kelas` varchar(500) NOT NULL,
-  `guru_idguru` int(11) NOT NULL,
-  `siswa_idsiswa` int(11) NOT NULL
+  `namakelas` varchar(100) DEFAULT NULL,
+  `kursi` int(11) DEFAULT NULL,
+  `meja` int(11) DEFAULT NULL,
+  `gambar_kelas` varchar(500) DEFAULT NULL,
+  `guru_idguru` int(11) DEFAULT NULL,
+  `siswa_idsiswa` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -98,8 +98,8 @@ CREATE TABLE `kelas` (
 
 CREATE TABLE `matapelajaran` (
   `idpelajaran` int(11) NOT NULL,
-  `namapelajaran` varchar(100) NOT NULL,
-  `guru_idguru` int(11) NOT NULL
+  `namapelajaran` varchar(100) DEFAULT NULL,
+  `guru_idguru` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -121,11 +121,18 @@ INSERT INTO `matapelajaran` (`idpelajaran`, `namapelajaran`, `guru_idguru`) VALU
 
 CREATE TABLE `peminjaman` (
   `id_peminjaman` int(11) NOT NULL,
-  `tanggal_pinjam` date NOT NULL,
-  `tanggal_kembali` date NOT NULL,
-  `guru_idguru` int(11) NOT NULL,
-  `siswa_idsiswa` int(11) NOT NULL
+  `tanggal_pinjam` date DEFAULT NULL,
+  `tanggal_kembali` date DEFAULT NULL,
+  `guru_idguru` int(11) DEFAULT NULL,
+  `siswa_idsiswa` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `peminjaman`
+--
+
+INSERT INTO `peminjaman` (`id_peminjaman`, `tanggal_pinjam`, `tanggal_kembali`, `guru_idguru`, `siswa_idsiswa`) VALUES
+(1, '2024-03-01', '2024-03-17', 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -135,20 +142,9 @@ CREATE TABLE `peminjaman` (
 
 CREATE TABLE `peminjaman_buku` (
   `id_peminjaman` int(11) NOT NULL,
-  `jumlah_buku` int(11) NOT NULL,
-  `buku_id_buku` int(11) NOT NULL
+  `jumlah_buku` int(11) DEFAULT NULL,
+  `buku_id_buku` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Triggers `peminjaman_buku`
---
-DELIMITER $$
-CREATE TRIGGER `peminjaman` AFTER INSERT ON `peminjaman_buku` FOR EACH ROW begin
-	update buku set stok = stok - NEW.jumlah_buku
-	where id_buku = NEW.buku_id_buku;
-end
-$$
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -158,22 +154,11 @@ DELIMITER ;
 
 CREATE TABLE `pengembalian_buku` (
   `id_pengembalian` int(11) NOT NULL,
-  `jumlah_buku` int(11) NOT NULL,
-  `tanggal_pengembalian` date NOT NULL,
-  `buku_id_buku` int(11) NOT NULL,
-  `peminjaman_id_peminjaman` int(11) NOT NULL
+  `jumlah_buku` int(11) DEFAULT NULL,
+  `tanggal_pengembalian` date DEFAULT NULL,
+  `buku_id_buku` int(11) DEFAULT NULL,
+  `peminjaman_id_peminjaman` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Triggers `pengembalian_buku`
---
-DELIMITER $$
-CREATE TRIGGER `pengembalian` AFTER INSERT ON `pengembalian_buku` FOR EACH ROW begin
-	update buku set stok = stok + NEW.jumlah_buku
-	where id_buku = NEW.buku_id_buku;
-end
-$$
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -183,11 +168,11 @@ DELIMITER ;
 
 CREATE TABLE `siswa` (
   `idsiswa` int(11) NOT NULL,
-  `nama` varchar(100) DEFAULT NULL,
+  `nama` varchar(255) DEFAULT NULL,
   `alamat` text DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `no_hp` varchar(20) DEFAULT NULL,
-  `users_id` int(11) NOT NULL
+  `users_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -229,7 +214,7 @@ INSERT INTO `users` (`id`, `username`, `password`) VALUES
 --
 ALTER TABLE `buku`
   ADD PRIMARY KEY (`id_buku`),
-  ADD KEY `matapelajaran_idpelajaran` (`matapelajaran_idpelajaran`);
+  ADD KEY `buku_ibfk_1` (`matapelajaran_idpelajaran`);
 
 --
 -- Indexes for table `guru`
@@ -242,8 +227,8 @@ ALTER TABLE `guru`
 --
 ALTER TABLE `kelas`
   ADD PRIMARY KEY (`id_kelas`),
-  ADD KEY `kelas_ibfk_1` (`guru_idguru`),
-  ADD KEY `kelas_ibfk_2` (`siswa_idsiswa`);
+  ADD KEY `guru_idguru` (`guru_idguru`),
+  ADD KEY `siswa_idsiswa` (`siswa_idsiswa`);
 
 --
 -- Indexes for table `matapelajaran`
@@ -264,6 +249,7 @@ ALTER TABLE `peminjaman`
 -- Indexes for table `peminjaman_buku`
 --
 ALTER TABLE `peminjaman_buku`
+  ADD PRIMARY KEY (`id_peminjaman`),
   ADD KEY `buku_id_buku` (`buku_id_buku`);
 
 --
@@ -271,7 +257,8 @@ ALTER TABLE `peminjaman_buku`
 --
 ALTER TABLE `pengembalian_buku`
   ADD PRIMARY KEY (`id_pengembalian`),
-  ADD KEY `buku_id_buku` (`buku_id_buku`);
+  ADD KEY `buku_id_buku` (`buku_id_buku`),
+  ADD KEY `peminjaman_id_peminjaman` (`peminjaman_id_peminjaman`);
 
 --
 -- Indexes for table `siswa`
@@ -287,58 +274,6 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `buku`
---
-ALTER TABLE `buku`
-  MODIFY `id_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `guru`
---
-ALTER TABLE `guru`
-  MODIFY `idguru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `kelas`
---
-ALTER TABLE `kelas`
-  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `matapelajaran`
---
-ALTER TABLE `matapelajaran`
-  MODIFY `idpelajaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `peminjaman`
---
-ALTER TABLE `peminjaman`
-  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `pengembalian_buku`
---
-ALTER TABLE `pengembalian_buku`
-  MODIFY `id_pengembalian` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `siswa`
---
-ALTER TABLE `siswa`
-  MODIFY `idsiswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
 -- Constraints for dumped tables
 --
 
@@ -352,8 +287,8 @@ ALTER TABLE `buku`
 -- Constraints for table `kelas`
 --
 ALTER TABLE `kelas`
-  ADD CONSTRAINT `kelas_ibfk_1` FOREIGN KEY (`guru_idguru`) REFERENCES `guru` (`idguru`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `kelas_ibfk_2` FOREIGN KEY (`siswa_idsiswa`) REFERENCES `siswa` (`idsiswa`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `kelas_ibfk_1` FOREIGN KEY (`guru_idguru`) REFERENCES `guru` (`idguru`),
+  ADD CONSTRAINT `kelas_ibfk_2` FOREIGN KEY (`siswa_idsiswa`) REFERENCES `siswa` (`idsiswa`);
 
 --
 -- Constraints for table `matapelajaran`
@@ -365,26 +300,27 @@ ALTER TABLE `matapelajaran`
 -- Constraints for table `peminjaman`
 --
 ALTER TABLE `peminjaman`
-  ADD CONSTRAINT `peminjaman_ibfk_1` FOREIGN KEY (`guru_idguru`) REFERENCES `guru` (`idguru`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `peminjaman_ibfk_1` FOREIGN KEY (`guru_idguru`) REFERENCES `guru` (`idguru`),
   ADD CONSTRAINT `peminjaman_ibfk_2` FOREIGN KEY (`siswa_idsiswa`) REFERENCES `siswa` (`idsiswa`);
 
 --
 -- Constraints for table `peminjaman_buku`
 --
 ALTER TABLE `peminjaman_buku`
-  ADD CONSTRAINT `peminjaman_buku_ibfk_1` FOREIGN KEY (`buku_id_buku`) REFERENCES `buku` (`id_buku`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `peminjaman_buku_ibfk_1` FOREIGN KEY (`buku_id_buku`) REFERENCES `buku` (`id_buku`);
 
 --
 -- Constraints for table `pengembalian_buku`
 --
 ALTER TABLE `pengembalian_buku`
-  ADD CONSTRAINT `pengembalian_buku_ibfk_1` FOREIGN KEY (`buku_id_buku`) REFERENCES `buku` (`id_buku`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `pengembalian_buku_ibfk_1` FOREIGN KEY (`buku_id_buku`) REFERENCES `buku` (`id_buku`),
+  ADD CONSTRAINT `pengembalian_buku_ibfk_2` FOREIGN KEY (`peminjaman_id_peminjaman`) REFERENCES `peminjaman` (`id_peminjaman`);
 
 --
 -- Constraints for table `siswa`
 --
 ALTER TABLE `siswa`
-  ADD CONSTRAINT `siswa_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `siswa_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

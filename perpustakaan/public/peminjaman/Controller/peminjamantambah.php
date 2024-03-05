@@ -1,5 +1,6 @@
 <?php 
     include_once("../../../config/koneksi.php");
+    
     class PeminjamanController {
         private $kon;
         public function __construct($connection) {
@@ -33,7 +34,7 @@
                 } else {
                     return "Gagal menyimpan data";
                 }
-            } else if (empty($guru_idguru) && !empty($siswa_idsiswa)) {
+            } elseif (empty($guru_idguru) && !empty($siswa_idsiswa)) {
                 $insertData = mysqli_query($this->kon, "INSERT INTO peminjaman(id_peminjaman, tanggal_pinjam, tanggal_kembali, guru_idguru, siswa_idsiswa)
                                                         VALUES ('$idpeminjaman', '$tanggalpinjam', '$tanggalkembali', NULL, '$siswa_idsiswa')"); 
                 if ($insertData) {

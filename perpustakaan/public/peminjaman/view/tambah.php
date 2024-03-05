@@ -11,17 +11,18 @@
                 'tanggal_pinjam' => $_POST['tanggal_pinjam'],
                 'tanggal_kembali' => $_POST['tanggal_kembali'],
                 'guru_idguru' => $_POST['guru_idguru'],
-                'siswa_idsiswa' => null,
+                'siswa_idsiswa' => null
             ];
             $message = $peminjamanController->tambahDataPeminjaman($data);
-        } else if ($_POST['role'] === 'siswa_idsiswa' && isset($_POST['siswa_idsiswa']) && !empty($_POST['siswa_idsiswa']) && !isset($_POST['guru_id'])) {
-            $idpeminjaman = $peminjamanController->tambahPeminjaman();
+
+        } elseif ($_POST['role'] === 'siswa_idsiswa' && isset($_POST['siswa_idsiswa']) && !empty($_POST['siswa_idsiswa']) && !isset($_POST['guru_id'])) {
+            $id_peminjaman = $peminjamanController->tambahPeminjaman();
             $data = [
                 'id_peminjaman' => $idpeminjaman,
                 'tanggal_pinjam' => $_POST['tanggal_pinjam'],
                 'tanggal_kembali' => $_POST['tanggal_kembali'],
                 'guru_idguru' => null,
-                'siswa_idsiswa' => $_POST['siswa_idsiswa'],
+                'siswa_idsiswa' => $_POST['siswa_idsiswa']
             ];
             $message = $peminjamanController->tambahDataPeminjaman($data);
         } else {
@@ -42,7 +43,6 @@
         function showOptions(role) {
             var guruOptions = document.getElementById('guruOptions');
             var siswaOptions = document.getElementById('siswaOptions');
-
             if (role === 'guru') {
                 guruOptions.style.display = 'block';
                 siswaOptions.style.display = 'none';
@@ -71,7 +71,7 @@
                     <label for="siswa_idsiswa">Siswa</label>
                 </td>
             </tr>
-            <tr id="guruOptions" style="display: none;">
+            <tr id="guruOptions" style="display:none;">
                 <td>Data Guru</td>
                 <td>
                     <select name="guru_idguru" style="width: 100%;">
@@ -83,7 +83,7 @@
                     </select>
                 </td>
             </tr>
-            <tr id="siswaOptions" style="display: none;">
+            <tr id="siswaOptions" style="display:none;">
                 <td>Data Siswa</td>
                 <td>
                     <select name="siswa_idsiswa" style="width: 100%;">
@@ -105,7 +105,7 @@
             </tr>
         </table>
         <input type="submit" name="submit" value="Tambah Data">
-        <?php  if (isset($message)) : ?>
+        <?php  if (isset($message)): ?>
             <div class="success-message">
                 <?php echo $message; ?>
             </div>
