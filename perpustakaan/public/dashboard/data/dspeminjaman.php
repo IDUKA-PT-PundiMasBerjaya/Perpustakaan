@@ -21,7 +21,7 @@
     ?>
     <table border="1">
         <h1>Data Peminjaman</h1>
-        <a href="../../peminjaman/tambah/tambah.php">| Tambah Data |</a>
+        <a href="../../peminjaman/view/tambah.php">| Tambah Data |</a>
         <a href="../../peminjaman/cetak.php" target="_blank"> Cetak |</a>
         <a href="../dashboard.php"> Home |</a>
             <?php 
@@ -35,7 +35,7 @@
                             FROM peminjaman p
                             LEFT JOIN guru g ON p.guru_idguru = g.idguru
                             LEFT JOIN siswa s ON p.siswa_idsiswa = s.idsiswa
-                            WHERE p.id_peminjaman LIKE '%".$cari."%' OR p.guru_idguru LIKE '%".$cari."%' OR p.siswa_idsiswa LIKE '%".$cari."%'";
+                            WHERE p.id_peminjaman LIKE '%$cari%' OR p.guru_idguru LIKE '%$cari%' OR p.siswa_idsiswa LIKE '%$cari%'";
                 } else {
                     $sql = "SELECT p.id_peminjaman, p.tanggal_pinjam, p.tanggal_kembali,
                                 CASE
@@ -63,12 +63,12 @@
             <?php 
                 while ($userAmbilData = mysqli_fetch_array($ambildata)) {
                     echo "<tr>";
-                        echo "<td>" . $id = $userAmbilData['id_peminjaman'] . "</td>";
-                        echo "<td>" . $namapengguna = $userAmbilData['namapengguna'] . "</td>";
-                        echo "<td>" . $tglpinjam = $userAmbilData['tanggal_pinjam'] . "</td>";
-                        echo "<td>" . $tglkembali = $userAmbilData['tanggal_kembali'] . "</td>";
+                        echo "<td>" . $userAmbilData['id_peminjaman'] . "</td>";
+                        echo "<td>" . $userAmbilData['namapengguna'] . "</td>";
+                        echo "<td>" . $userAmbilData['tanggal_pinjam'] . "</td>";
+                        echo "<td>" . $userAmbilData['tanggal_kembali'] . "</td>";
                         echo "<td>
-                                | <a href='../../peminjaman/view/view.php?id_peminjaman=$id'>View</a> |
+                                | <a href='../../peminjaman/view/view.php?id_peminjaman=" . $userAmbilData['id_peminjaman']. "'> View</a> |
                             </td>";
                     echo "</tr>";
                 }

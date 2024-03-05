@@ -19,7 +19,7 @@
             <tr>
                 <td>ID Peminjaman</td>
                 <td>: </td>
-                <td><?php echo $id; ?></td>
+                <td><?php echo $id_peminjaman; ?></td>
             </tr>
             <tr>
                 <td>Nama Pengguna</td>

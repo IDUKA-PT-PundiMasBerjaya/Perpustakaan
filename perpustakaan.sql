@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 05, 2024 at 03:36 AM
+-- Generation Time: Mar 05, 2024 at 08:31 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -90,13 +90,6 @@ CREATE TABLE `kelas` (
   `siswa_idsiswa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `kelas`
---
-
-INSERT INTO `kelas` (`id_kelas`, `namakelas`, `kursi`, `meja`, `gambar_kelas`, `guru_idguru`, `siswa_idsiswa`) VALUES
-(1, 'XI PPLG 1', 40, 40, 'IoT.jpeg', 1, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -129,7 +122,7 @@ INSERT INTO `matapelajaran` (`idpelajaran`, `namapelajaran`, `guru_idguru`) VALU
 CREATE TABLE `peminjaman` (
   `id_peminjaman` int(11) NOT NULL,
   `tanggal_pinjam` date NOT NULL,
-  `tanggal_kembali` int(11) NOT NULL,
+  `tanggal_kembali` date NOT NULL,
   `guru_idguru` int(11) NOT NULL,
   `siswa_idsiswa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -325,7 +318,7 @@ ALTER TABLE `matapelajaran`
 -- AUTO_INCREMENT for table `peminjaman`
 --
 ALTER TABLE `peminjaman`
-  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pengembalian_buku`
@@ -373,7 +366,7 @@ ALTER TABLE `matapelajaran`
 --
 ALTER TABLE `peminjaman`
   ADD CONSTRAINT `peminjaman_ibfk_1` FOREIGN KEY (`guru_idguru`) REFERENCES `guru` (`idguru`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `peminjaman_ibfk_2` FOREIGN KEY (`siswa_idsiswa`) REFERENCES `siswa` (`idsiswa`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `peminjaman_ibfk_2` FOREIGN KEY (`siswa_idsiswa`) REFERENCES `siswa` (`idsiswa`);
 
 --
 -- Constraints for table `peminjaman_buku`

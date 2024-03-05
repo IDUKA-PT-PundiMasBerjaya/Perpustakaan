@@ -1,6 +1,6 @@
 <?php 
     include_once("../../../config/koneksi.php");
-    include_once("peminjamantambah.php");
+    include_once("../Controller/peminjamantambah.php");
 
     $peminjamanController = new PeminjamanController($kon);
     if (isset($_POST['submit'])) {
@@ -28,7 +28,7 @@
             $message = "Harap pilih salah satu antara ID guru atau ID siswa control";
         }
     }
-
+    //Mengambil data siswa dan guru
     $dataSiswa = mysqli_query($kon, "SELECT idsiswa, nama FROM siswa");
     $dataGuru = mysqli_query($kon, "SELECT idguru, nama FROM guru");
 ?>
@@ -60,7 +60,7 @@
         <table border="1">
             <tr>
                 <td>ID Peminjaman</td>
-                <td><input type="text" name="idpeminjaman" value="<?php echo($peminjamanController->tambahPeminjaman())?>" readonly"></td>
+                <td><input type="text" name="idpeminjaman" value="<?php echo($peminjamanController->tambahPeminjaman())?>" readonly></td>
             </tr>
             <tr>
                 <td>Pilih</td>
@@ -74,7 +74,7 @@
             <tr id="guruOptions" style="display: none;">
                 <td>Data Guru</td>
                 <td>
-                    <select name="guru_idguru">
+                    <select name="guru_idguru" style="width: 100%;">
                         <?php while($row = mysqli_fetch_assoc($dataGuru)) : ?>
                             <option value="<?php echo $row['idguru']; ?>">
                                 <?php echo $row['idguru'] . ' - ' . $row['nama']; ?>
@@ -86,7 +86,7 @@
             <tr id="siswaOptions" style="display: none;">
                 <td>Data Siswa</td>
                 <td>
-                    <select name="siswa_idsiswa">
+                    <select name="siswa_idsiswa" style="width: 100%;">
                         <?php while($row = mysqli_fetch_assoc($dataSiswa)) : ?>
                             <option value="<?php echo $row['idsiswa']; ?>">
                                 <?php echo $row['idsiswa'] . ' - ' . $row['nama']; ?>

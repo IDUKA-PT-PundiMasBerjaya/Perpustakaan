@@ -1,6 +1,6 @@
 <?php  
 	include_once("../../config/koneksi.php");
-	require("../../library/fpdf.php");
+	require("../../../library/fpdf.php");
 
 	$pdf = new FPDF('L', 'mm', 'A4');
 	$pdf->AddPage();
