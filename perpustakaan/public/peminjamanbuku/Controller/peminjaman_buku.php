@@ -1,9 +1,7 @@
 <?php 
     include_once("../../../config/koneksi.php");
-
-    class TammbahBukuController {
+class TambahBukuController {
         private $kon;
-
         public function __construct($connection) {
             $this->kon = $connection;
         }
@@ -16,7 +14,6 @@
             if (empty($id_peminjaman) || !is_numeric($id_peminjaman)) {
                 return "Gagal menyimpan data, Peminjaman ID tidak valid.";
             }
-
             foreach ($id_buku_array as $key => $buku_id_buku) {
                 $jumlah = $jumlah_array[$key];
 
@@ -40,7 +37,7 @@
         }
 
         private function cekStokBuku($buku_id_buku, $jumlah) {
-            $query = mysqli_query ($this->kon, "SELECT stok FROM buku WHERE id_buku = '$buku_id_buku");
+            $query = mysqli_query ($this->kon, "SELECT stok FROM buku WHERE id_buku = '$buku_id_buku'");
             $data = mysqli_fetch_assoc($query);
 
             if ($data['stok'] >= $jumlah) {

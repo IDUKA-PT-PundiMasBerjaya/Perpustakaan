@@ -4,8 +4,8 @@
         $cari = $_GET['cari'];
     }
 
-    $perPage = isset($_GET['perPage']) ? $_GET['perPage'] : 15;
-    $page = isset($_GET['page']) ? $_GET['page'] : 1;
+    $perPage = isset($_GET['perPage']) ? (int)$_GET['perPage'] : 15;
+    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
     $start = ($page > 1) ? ($page * $perPage) - $perPage : 0;
 
     $query = "SELECT peminjaman_buku.id_peminjaman, buku.judul AS nama_buku,
@@ -22,38 +22,37 @@
                 JOIN
                 peminjaman ON peminjaman_buku.id_peminjaman = peminjaman.id_peminjaman
                 LEFT JOIN 
-                siswa ON peminjaman.siswa_idsiswa = siswa_idsiswa
+                siswa ON peminjaman.siswa_idsiswa = siswa.idsiswa
                 LEFT JOIN
                 guru ON peminjaman.guru_idguru = guru.idguru
-                JOIN buku ON peminjaman_buku.buku_id_buku = buku.id_buku";
+                JOIN 
+                buku ON peminjaman_buku.buku_id_buku = buku.id_buku";
     
     if (!empty($cari)) {
-        $query .= "WHERE peminjaman_buku.id_peminjaman LIKE '%". $cari . "%' OR siswa.nama LIKE '%". $cari ."%' OR guru.nama LIKE '%". $cari ."%' OR buku.judul LIKE '%". $cari ."%'";
+        $query .= "WHERE peminjaman_buku.id_peminjaman LIKE '%$cari%' OR siswa.nama LIKE '%$cari%' OR guru.nama LIKE '%$cari%' OR buku.judul LIKE '%$cari%'";
     }
 
-    $query .= " ORDER BY peminjaman_buku.id_peminjaman ASC LIMIT $start, $perPage";
+    $query .= " ORDER BY peminjaman_buku.id_peminjaman DESC LIMIT $start, $perPage";
     $ambildata = mysqli_query($kon, $query);
     $num = mysqli_num_rows($ambildata);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Halaman Data Peminjaman</title>
+    <title>Halaman Data Peminjaman Buku</title>
 </head>
 <body>
-    <form action="dspeminjaman.php" method="get">
+    <form action="dspeminjamanbuku.php" method="get">
         <label>Cari :</label>
         <input type="text" name="cari" value="<?php echo isset($_GET['cari']) ? $_GET['cari'] : ''; ?>">
         <input type="submit" value="Cari">
     </form>
-    <?php include('../../peminjamanbuku/template/tabel_template.php'); ?>
+    <?php include('../../peminjamanbuku/Controller/tabel_template.php'); ?>
     <?php 
         $totalData = mysqli_num_rows(mysqli_query($kon, "SELECT * FROM peminjaman_buku"));
         $totalPage = ceil($totalData / $perPage);
 
-        include('../../peminjamanbuku/template/pagination_template.php');
+        include('../../peminjamanbuku/Controller/pagination_template.php');
     ?>
 </body>
 </html>
