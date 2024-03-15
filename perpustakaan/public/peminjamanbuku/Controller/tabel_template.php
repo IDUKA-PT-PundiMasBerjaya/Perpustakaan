@@ -1,5 +1,5 @@
 <a href="../../../public/dashboard/dashboard.php">Home</a>
-<a href="../../peminjamanbuku/view/tambah.php">Tambah Data Buku</a>
+<a href="../../peminjamanbuku/view/tambah.php">Meminjam Buku</a>
 <a href="#" target="_blank">Cetak</a>
 <form action="../../dashboard/data/dspeminjamanbuku.php" method="get">
         <label>Tampilkan :</label>
@@ -13,7 +13,7 @@
     <table border="1">
         <tr>
             <th> No </th>
-            <th> Peminjaman ID Barang </th>
+            <th> Peminjaman ID Buku </th>
             <th> Nama Peminjam </th>
             <th> Nama Buku </th>
             <th> Gambar </th>

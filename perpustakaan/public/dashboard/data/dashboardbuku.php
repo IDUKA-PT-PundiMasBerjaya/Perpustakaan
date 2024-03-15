@@ -80,7 +80,10 @@
 		th:nth-child(8) {
             color: #fff; /* Warna teks putih */
         }
-        
+
+        .btn-pinjam {
+            color: #4338ca; /* Warna hijau muda */
+        }
         .btn-view {
             color: #38c172; /* Warna hijau muda */
         }
@@ -190,6 +193,7 @@
                         "</td>";
                     echo "<td>" . $matapelajaran = $userAmbilData['namapelajaran'] . "</td>";
 					echo "<td>
+                            <a href='../../peminjamanbuku/view/tambah.php?id_peminjaman=" . $userAmbilData['id_buku'] . "' class='btn btn-pinjam'> Pinjam </a> |
 							<a href='../../buku/view/view.php?id_buku=" . $userAmbilData['id_buku'] . "' class='btn btn-view'> View </a> | 
 							<a href='../../buku/view/update.php?id_buku=" . $userAmbilData['id_buku'] . "' class='btn btn-edit'> Edit </a> | 
 							<a href='../../buku/Controller/bukuhapus.php?id_buku=" . $userAmbilData['id_buku'] ."' class='btn btn-hapus'> Hapus </a> 

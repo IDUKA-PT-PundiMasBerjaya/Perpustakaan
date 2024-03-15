@@ -73,7 +73,7 @@
         <div class="nav-box"><a href="data/dashboardkelas.php">Data Kelas</a></div>
         <div class="nav-box"><a href="data/dspeminjaman.php">Data Peminjaman</a></div>
         <div class="nav-box"><a href="data/dspeminjamanbuku.php">Data Peminjaman Buku</a></div>
-        <div class="nav-box"><a href="data/dashboardpengembalian.php">Data Pengembalian</a></div>
+        <div class="nav-box"><a href="data/dspengembalianbuku.php">Data Pengembalian</a></div>
     </nav>
 
     </div>

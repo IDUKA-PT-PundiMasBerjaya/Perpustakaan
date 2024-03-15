@@ -1,6 +1,6 @@
 <?php 
     include_once("../../../config/koneksi.php");
-    include_once("viewdata.php");
+    include_once("../Controller/viewdata.php");
 
     $peminjamanController = new PeminjamanController($kon);
 ?>
@@ -29,12 +29,12 @@
             <tr>
                 <td>Tanggal Pinjam</td>
                 <td>: </td>
-                <td><?php echo $tglpinjam; ?></td>
+                <td><?php echo $tanggal_pinjam; ?></td>
             </tr>
             <tr>
                 <td>Tanggal Kemballi</td>
                 <td>: </td>
-                <td><?php echo $tglkembali; ?></td>
+                <td><?php echo $tanggal_kembali; ?></td>
             </tr>
         </table>
     </form>

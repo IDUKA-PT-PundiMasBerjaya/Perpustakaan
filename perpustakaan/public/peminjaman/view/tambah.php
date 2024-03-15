@@ -18,7 +18,7 @@
         } elseif ($_POST['role'] === 'siswa_idsiswa' && isset($_POST['siswa_idsiswa']) && !empty($_POST['siswa_idsiswa']) && !isset($_POST['guru_id'])) {
             $id_peminjaman = $peminjamanController->tambahPeminjaman();
             $data = [
-                'id_peminjaman' => $idpeminjaman,
+                'id_peminjaman' => $id_peminjaman,
                 'tanggal_pinjam' => $_POST['tanggal_pinjam'],
                 'tanggal_kembali' => $_POST['tanggal_kembali'],
                 'guru_idguru' => null,

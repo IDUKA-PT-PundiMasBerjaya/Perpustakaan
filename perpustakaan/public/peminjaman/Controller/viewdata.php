@@ -8,7 +8,7 @@
             $this->kon = $connection;
         }
 
-        public function getPeminjamanData($id) {
+        public function getPeminjamanData($id_peminjaman) {
             $result = mysqli_query($this->kon, "SELECT p.id_peminjaman, p.tanggal_pinjam, p.tanggal_kembali,
                                                     CASE
                                                         WHEN p.guru_idguru IS NOT NULL THEN g.nama
@@ -17,19 +17,19 @@
                                                 FROM peminjaman p
                                                 LEFT JOIN guru g ON p.guru_idguru = g.idguru
                                                 LEFT JOIN siswa s ON p.siswa_idsiswa = s.idsiswa
-                                                WHERE p.id_peminjaman = '$id'");
+                                                WHERE p.id_peminjaman = '$id_peminjaman'");
             return mysqli_fetch_array($result);
         }
     }
 
     $peminjamanController = new PeminjamanController($kon);
-    $id = $_GET['id_peminjaman'];
-    $peminjamanData = $peminjamanController->getPeminjamanData($id);
+    $id_peminjaman = $_GET['id_peminjaman'];
+    $peminjamanData = $peminjamanController->getPeminjamanData($id_peminjaman);
 
     if ($peminjamanData) {
-        $id = $peminjamanData['id_peminjaman'];
+        $id_peminjaman = $peminjamanData['id_peminjaman'];
         $namapengguna = $peminjamanData['namapengguna'];
-        $tglpinjam = $peminjamanData['tanggal_pinjam'];
-        $tglkembali = $peminjamanData['tanggal_kembali'];
+        $tanggal_pinjam = $peminjamanData['tanggal_pinjam'];
+        $tanggal_kembali = $peminjamanData['tanggal_kembali'];
     }
 ?>
