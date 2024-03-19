@@ -1,5 +1,5 @@
 <?php  
-	include_once("../../config/koneksi.php");
+	include_once("../../../config/koneksi.php");
 	require("../../../library/fpdf.php");
 
 	$pdf = new FPDF('L', 'mm', 'A4');
@@ -7,7 +7,7 @@
 
 	$pdf->SetFont('Times', 'B', 13);
 	$pdf->Cell(0, 15, '', 0, 1);
-	$pdf->Cell(250, 10, 'Data Peminjaman', 0, 0, 'R');
+	$pdf->Cell(250, 10, 'Data Peminjaman', 0, 0, 'C');
 
 	$pdf->Cell(10, 17, '', 0, 1);	
 	$pdf->SetFont('Times', 'B', 9);

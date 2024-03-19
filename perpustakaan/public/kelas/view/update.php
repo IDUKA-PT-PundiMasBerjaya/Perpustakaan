@@ -7,14 +7,13 @@
 	if (isset($_POST['update'])) {
 		$id_kelas = $_POST['id_kelas'];
 		$namakelas = $_POST['namakelas'];
-		$ketuakelas = $_POST['ketuakelas'];
 		$kursi = $_POST['kursi'];
 		$meja = $_POST['meja'];
 		$gambar_kelas = $_POST['gambar_kelas'];
 		$guru_idguru = $_POST['guru_idguru'];
 		$siswa_idsiswa = $_POST['siswa_idsiswa'];
 
-		$message = $kelasController->updateKelas($id_kelas, $namakelas, $ketuakelas, $kursi, $meja, $gambar_kelas, $guru_idguru, $siswa_idsiswa);
+		$message = $kelasController->updateKelas($id_kelas, $namakelas, $kursi, $meja, $gambar_kelas, $guru_idguru, $siswa_idsiswa);
 		echo $message;
 
 		header("Location: ../../dashboard/data/dashboardkelas.php");
@@ -22,7 +21,6 @@
 
 	$id_kelas = null;
 	$namakelas = null;
-	$ketuakelas = null;
 	$kursi = null;
 	$meja = null;
 	$gambar_kelas = null;
@@ -36,7 +34,6 @@
 		if ($result) {
 			$id_kelas = $result['id_kelas'];
 			$namakelas = $result['namakelas'];
-			$ketuakelas = $result['ketuakelas'];
 			$kursi = $result['kursi'];
 			$meja = $result['meja'];
 			$gambar_kelas = $result['gambar_kelas'];
@@ -214,7 +211,7 @@
 			</tr>
 		</table>
 		<div class="update-button">
-            <input type="hidden" name="id_buku" value="<?php echo $id_buku; ?>">
+            <input type="hidden" name="id_kelas" value="<?php echo $id_kelas; ?>">
             <input type="submit" name="update" value="Update">
         </div>
 	</form>

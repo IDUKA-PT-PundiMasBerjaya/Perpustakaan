@@ -171,8 +171,8 @@
 			<th class="border border-gray-400 px-4 py-2 text-center"> Kursi </th>
             <th class="border border-gray-400 px-4 py-2 text-center"> Meja </th>
             <th class="border border-gray-400 px-4 py-2 text-center"> Gambar </th>
-			<th class="border border-gray-400 px-4 py-2 text-center"> Nama Guru</th>
-			<th class="border border-gray-400 px-4 py-2 text-center"> Nama Siswa</th>
+			<th class="border border-gray-400 px-4 py-2 text-center"> Wali Kelas </th>
+			<th class="border border-gray-400 px-4 py-2 text-center"> Ketua KElas</th>
 			<th class="border border-gray-400 px-4 py-2 text-center"> Aksi </th>
 		</tr>
 			<tbody>

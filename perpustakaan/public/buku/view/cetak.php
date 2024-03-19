@@ -12,9 +12,9 @@
 	$pdf->Cell(10, 17, '', 0, 1);	
 	$pdf->SetFont('Times', 'B', 9);
 	$pdf->Cell(20, 7, 'ID Buku', 1, 0, 'C');
-	$pdf->Cell(30, 7, 'Judul', 1, 0, 'C');
+	$pdf->Cell(40, 7, 'Judul', 1, 0, 'C');
 	$pdf->Cell(30, 7, 'Penulis', 1, 0, 'C');
-	$pdf->Cell(80, 7, 'Keterangan', 1, 0, 'C');
+	$pdf->Cell(100, 7, 'Keterangan', 1, 0, 'C');
 	$pdf->Cell(20, 7, 'Stok', 1, 0, 'C');
     $pdf->Cell(40, 7, 'gambar', 1, 0, 'C');
     $pdf->Cell(20, 7, 'ID Pelajaran', 1, 0, 'C');
@@ -27,9 +27,9 @@
 
     while ($d = mysqli_fetch_array($data)) {
 		$pdf->Cell(20, 6, $d['id_buku'], 1, 0, 'C');
-		$pdf->Cell(30, 6, $d['judul'], 1, 0, 'C');
+		$pdf->Cell(40, 6, $d['judul'], 1, 0, 'C');
 		$pdf->Cell(30, 6, $d['penulis'], 1, 0, 'C');
-		$pdf->Cell(80, 6, $d['keterangan'], 1, 0, 'C');
+		$pdf->Cell(100, 6, $d['keterangan'], 1, 0, 'C');
 		$pdf->Cell(20, 6, $d['stok'], 1, 0, 'C');
         $pdf->Cell(40, 6, $d['gambar'], 1, 0, 'C');
         $pdf->Cell(20, 6, $d['matapelajaran_idpelajaran'], 1, 0, 'C');

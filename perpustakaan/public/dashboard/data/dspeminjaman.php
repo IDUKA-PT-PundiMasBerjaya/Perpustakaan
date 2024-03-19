@@ -22,7 +22,7 @@
     <table border="1">
         <h1>Data Peminjaman</h1>
         <a href="../../peminjaman/view/tambah.php">| Tambah Data |</a>
-        <a href="../../peminjaman/cetak.php" target="_blank"> Cetak |</a>
+        <a href="../../peminjaman/view/cetak.php" target="_blank"> Cetak |</a>
         <a href="../dashboard.php"> Home |</a>
             <?php 
                 if (isset($_GET['cari'])) {

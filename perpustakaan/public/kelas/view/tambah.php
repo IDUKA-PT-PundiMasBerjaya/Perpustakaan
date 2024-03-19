@@ -10,7 +10,6 @@
 		$data = [
 			'id_kelas' => $id_kelas,
       		'namakelas' => $_POST['namakelas'],
-			'ketuakelas' => $_POST['ketuakelas'],
 			'kursi' => $_POST['kursi'],
 			'meja' => $_POST['meja'],
 			'guru_idguru' => $_POST['guru_idguru'],
@@ -26,8 +25,6 @@
     $dataSiswa = "SELECT idsiswa, nama FROM siswa";
 	$hasilSiswa = mysqli_query($kon, $dataSiswa);
 ?>
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -175,7 +172,7 @@
 				<td><input class="input" type="file" name="gambar_kelas" required></td>
 			</tr>
 			<tr>
-	            <td>Nama Guru</td>
+	            <td> Wali Kelas </td>
 	            <td><select id="guru_idguru" name="guru_idguru" style="width :100%">
 		        <?php if (mysqli_num_rows($hasilGuru) > 0) : ?>
 			    <option value ="" disabled selected>Pilih Nama Guru</option> <?php while ($row = mysqli_fetch_assoc($hasilGuru)) : ?>
@@ -188,16 +185,16 @@
 	            </td>
             </tr>
 			<tr>
-	            <td>Nama Siswa</td>
+	            <td>Ketua Kelas</td>
 	            <td><select id="siswa_idsiswa" name="siswa_idsiswa" style="width :100%">
-		        <?php if (mysqli_num_rows($hasilSiswa) > 0) : ?>
-			    <option value ="" disabled selected>Pilih Nama Siswa</option> <?php while ($row = mysqli_fetch_assoc($hasilSiswa)) : ?>
-			    <option value ="<?php echo $row ['idsiswa']; ?>"> <?php echo $row['idsiswa'] . ' . ' . $row['nama']; ?></option>
-		        <?php endwhile; ?>
-		        <?php else : ?>
-			    <option value ="" disabled selected>Tambahkan Data Siswa terlebih Dahulu, Jika belum Ada </option>
-		        <?php endif; ?>
-		        </select>
+		                    <?php if (mysqli_num_rows($hasilSiswa) > 0) : ?>
+			                <option value ="" disabled selected>Pilih Nama Siswa</option> <?php while ($row = mysqli_fetch_assoc($hasilSiswa)) : ?>
+			                <option value ="<?php echo $row ['idsiswa']; ?>"> <?php echo $row['idsiswa'] . ' . ' . $row['nama']; ?></option>
+		                    <?php endwhile; ?>
+		                    <?php else : ?>
+			                <option value ="" disabled selected>Tambahkan Data Siswa terlebih Dahulu, Jika belum Ada </option>
+		                <?php endif; ?>
+		            </select>
 	            </td>
             </tr>
 		</table>

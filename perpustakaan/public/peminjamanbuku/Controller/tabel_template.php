@@ -1,6 +1,6 @@
 <a href="../../../public/dashboard/dashboard.php">Home</a>
 <a href="../../peminjamanbuku/view/tambah.php">Meminjam Buku</a>
-<a href="#" target="_blank">Cetak</a>
+<a href="../peminjamanbuku/view/cetak.php" target="_blank">Cetak</a>
 <form action="../../dashboard/data/dspeminjamanbuku.php" method="get">
         <label>Tampilkan :</label>
         <select name="perPage" onchange="this.form.submit()">
@@ -54,7 +54,7 @@
                         if ($key === 0) {
                             echo "<td rowspan='{$rowspanCounts}'>";
                             if (isset($userAmbilData['id_peminjaman'])) {
-                                echo "<a href='cetak.php?id_peminjaman={$userAmbilData['id_peminjaman']}'> Cetak </a>";
+                                echo "<a href='../../peminjamanbuku/view/cetakpeminjam.php?id_peminjaman={$userAmbilData['id_peminjaman']}'> Cetak </a>";
                             }
                             echo "</td>";
                         }

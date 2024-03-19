@@ -1,5 +1,5 @@
 <a href="../../pengembalianbuku/view/tambah.php">| Tambah Data Buku |</a>
-<a href="../../pengembalianbuku/" target="_blank">| Cetak |</a>
+<a href="../../pengembalianbuku/view/cetak.php" target="_blank">| Cetak |</a>
 <a href="../../../public/dashboard/dashboard.php">| Home |</a>
 <form action="../../dashboard/data/dspengembalianbuku.php" method="get">
     <label>Tampilkan :</label>
@@ -52,7 +52,7 @@
                         if ($key === 0) {
                             echo "<td rowspan='{$rowSpanCount}'>";
                             if (isset($userAmbilData['id_pengembalian'])) {
-                                echo "<a href='../../pengembalianbuku/cetak/cetak.php?id_pengembalian={$userAmbilData['id_pengembalian']}'>Cetak</a>";
+                                echo "<a href='../../pengembalianbuku/view/cetakpengembali.php?id_pengembalian={$userAmbilData['id_pengembalian']}'>Cetak</a>";
                             }
                             echo "</td>";
                         }
