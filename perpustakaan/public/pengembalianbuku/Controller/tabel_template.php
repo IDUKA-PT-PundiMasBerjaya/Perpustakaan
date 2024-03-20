@@ -2,7 +2,7 @@
 <a href="../../pengembalianbuku/view/cetak.php" target="_blank">| Cetak |</a>
 <a href="../../../public/dashboard/dashboard.php">| Home |</a>
 <form action="../../dashboard/data/dspengembalianbuku.php" method="get">
-    <label>Tampilkan :</label>
+<label>Tampilkan :</label>
     <select name="perPage" onchange="this.form.submit()">
         <option value="15" <?php echo isset($_GET['perPage']) && $_GET['perPage'] == 5 ? 'selected' : ''; ?>>15</option>
         <option value="25" <?php echo isset($_GET['perPage']) && $_GET['perPage'] == 10 ? 'selected' : ''; ?>>25</option>
@@ -15,10 +15,12 @@
         <th> No </th>
         <th> ID Pengembalian </th>
         <th> Nama Peminjam </th>
-        <th> Nama Buku </th>
         <th> Tanggal Pengembalian </th>
+        <th> Nama Buku </th>
         <th> Jumlah </th>
         <th> Gambar </th>
+        <th> Denda </th>
+        <th> Total Denda </th>
         <th> Aksi </th>
     </tr>
     <?php 
@@ -26,9 +28,16 @@
         $rowSpanCounts = [];
 
         if ($num > 0) {
+            $totalDendaByID = [];
+            
             while ($row = mysqli_fetch_array($ambildata)) {
                 $pengembalianID = $row['id_pengembalian'];
                 $rowSpanCounts[$pengembalianID][] = $row;
+
+                if (!isset($totalDendaByID[$pengembalianID])) {
+                    $totalDendaByID[$pengembalianID] = 0;
+                }
+                $totalDendaByID[$pengembalianID] += $row['denda'];
             }
 
             mysqli_data_seek($ambildata, 0);
@@ -41,21 +50,26 @@
                     if ($firstRow) {
                         echo "<td rowspan='{$rowSpanCount}'>" . $no++ . "</td>";
                         echo "<td rowspan='{$rowSpanCount}'>" . $userAmbilData['id_pengembalian'] . "</td>";
-                        echo "<td rowspan='{$rowSpanCount}'>" . $userAmbilData['namapeminjaman'] . "</td>";
+                        echo "<td rowspan='{$rowSpanCount}'>" . $userAmbilData['namapeminjaman'] . "</td>";      
+                        echo "<td rowspan='{$rowSpanCount}'>" . $userAmbilData['tanggal_pengembalian'] . "</td>";
                         $firstRow = false;
                     }
-                        echo "<td>" . $userAmbilData['nama_buku'] . "</td>";
-                        echo "<td>" . $userAmbilData['tanggal_pengembalian'] . "</td>";
-                        echo "<td>" . $userAmbilData['jumlah_buku'] . "</td>";
-                        echo "<td><img src='../../buku/aset/" . $userAmbilData['gambar_buku'] . "' width='110' height='150'></td>";
+                    echo "<td>" . $userAmbilData['nama_buku'] . "</td>";
+                    echo "<td>" . $userAmbilData['jumlah_buku'] . "</td>";
+                    echo "<td><img src='../../buku/aset/" . $userAmbilData['gambar_buku'] . "' width='110' height='150'></td>";
+                    echo "<td>" . $userAmbilData['telat_hari'] . " Hari - Rp. " . $userAmbilData['denda'] . "</td>";
 
-                        if ($key === 0) {
-                            echo "<td rowspan='{$rowSpanCount}'>";
-                            if (isset($userAmbilData['id_pengembalian'])) {
-                                echo "<a href='../../pengembalianbuku/view/cetakpengembali.php?id_pengembalian={$userAmbilData['id_pengembalian']}'>Cetak</a>";
-                            }
-                            echo "</td>";
+                    if ($key === 0) {
+                        echo "<td rowspan='{$rowSpanCount}'>Rp. " . $totalDendaByID[$pengembalianID] . "</td>";
+                    }
+
+                    if ($key === 0) {
+                        echo "<td rowspan='{$rowSpanCount}'>";
+                        if (isset($userAmbilData['id_pengembalian'])) {
+                            echo "<a href='../../pengembalianbuku/view/cetakpengembali.php?id_pengembalian={$userAmbilData['id_pengembalian']}' target='_blank'>Cetak</a>";
                         }
+                        echo "</td>";
+                    }
                     echo "</tr>";
                 }
             }

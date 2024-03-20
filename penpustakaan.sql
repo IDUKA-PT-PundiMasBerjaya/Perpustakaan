@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 15, 2024 at 08:45 AM
+-- Generation Time: Mar 20, 2024 at 10:13 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -42,11 +42,11 @@ CREATE TABLE `buku` (
 --
 
 INSERT INTO `buku` (`id_buku`, `judul`, `penulis`, `keterangan`, `stok`, `gambar`, `matapelajaran_idpelajaran`) VALUES
-(1, 'Buku Sakti Pemrograman Web Seri PHP', 'Mundzir MF', 'Buku terbitan Start-up ini memaparkan pemrograman web berbasis PHP', 45, 'PHP.jpg', 2),
+(1, 'Buku Sakti Pemrograman Web Seri PHP', 'Mundzir MF', 'Buku terbitan Start-up ini memaparkan pemrograman web berbasis PHP', 50, 'PHP.jpg', 2),
 (2, 'Introduction to IoT', 'Sudip Misra', 'IOT is a system of interrelated things, computing devices, mechanical and digital machines', 40, 'IoT.jpeg', 3),
-(3, 'Bimbingan dan Konseling di Sekolah', 'Dr. Ahmad Susanto', 'Pemberian layanan bimbingan dan konseling bagi siswa sangat penting dalam rangka untuk keberhasilan ', 45, 'BK.jpg', 4),
+(3, 'Bimbingan dan Konseling di Sekolah', 'Dr. Ahmad Susanto', 'Pemberian layanan bimbingan dan konseling bagi siswa sangat penting dalam rangka untuk keberhasilan ', 35, 'BK.jpg', 4),
 (4, 'Buku Sakti HTML, CSS & Javascript : Pemrograman Web Itu Gampang', 'Adam Saputra', 'HTML atau Hyper Text Markup Language merupakan sebuah bahasa pemrograman terstruktur yang dikembangk', 45, 'HTML, CSS dan PHP.jpg', 2),
-(5, 'Cyber Security Using Modern Technologies Artificial Intelligence, Blockchain and Quantum Cryptograph', 'Dr. Om Pal', 'The main objective of this book is to introduce cyber security using modern technologies such as Art', 45, 'Cyber security.jpg', 1),
+(5, 'Cyber Security Using Modern Technologies Artificial Intelligence, Blockchain and Quantum Cryptograph', 'Dr. Om Pal', 'The main objective of this book is to introduce cyber security using modern technologies such as Art', 50, 'Cyber security.jpg', 1),
 (6, 'Hacking the Hacker: Learn From the Experts Who Take Down Hackers', 'Roger A. Grimes', 'Hacking the Hacker takes you inside the world of cybersecurity to show you what goes on behind the s', 45, 'Hacking.jpg', 5);
 
 -- --------------------------------------------------------
@@ -89,6 +89,15 @@ CREATE TABLE `kelas` (
   `guru_idguru` int(11) DEFAULT NULL,
   `siswa_idsiswa` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `kelas`
+--
+
+INSERT INTO `kelas` (`id_kelas`, `namakelas`, `kursi`, `meja`, `gambar_kelas`, `guru_idguru`, `siswa_idsiswa`) VALUES
+(1, 'XI PPLG 1', 39, 39, 'XI PPLG 1.jpeg', 1, 1),
+(2, 'XI PPLG 2', 40, 40, 'XI PPLG 2.jpeg', 3, 2),
+(3, 'XI PPLG 3', 40, 40, 'XI PPLG 3.jpeg', 5, 4);
 
 -- --------------------------------------------------------
 
@@ -153,7 +162,9 @@ CREATE TABLE `peminjaman_buku` (
 
 INSERT INTO `peminjaman_buku` (`id_peminjaman`, `jumlah_buku`, `buku_id_buku`) VALUES
 (1, 5, 1),
-(1, 5, 2);
+(1, 5, 2),
+(2, 10, 3),
+(2, 5, 5);
 
 --
 -- Triggers `peminjaman_buku`
@@ -177,15 +188,16 @@ CREATE TABLE `pengembalian_buku` (
   `jumlah_buku` int(11) DEFAULT NULL,
   `tanggal_pengembalian` date DEFAULT NULL,
   `buku_id_buku` int(11) DEFAULT NULL,
-  `peminjaman_id_peminjaman` int(11) DEFAULT NULL
+  `peminjaman_id_peminjaman` int(11) DEFAULT NULL,
+  `denda` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pengembalian_buku`
 --
 
-INSERT INTO `pengembalian_buku` (`id_pengembalian`, `jumlah_buku`, `tanggal_pengembalian`, `buku_id_buku`, `peminjaman_id_peminjaman`) VALUES
-(1, 5, '2024-03-15', 1, 1);
+INSERT INTO `pengembalian_buku` (`id_pengembalian`, `jumlah_buku`, `tanggal_pengembalian`, `buku_id_buku`, `peminjaman_id_peminjaman`, `denda`) VALUES
+(1, 5, '2024-03-24', 1, 1, 7000);
 
 --
 -- Triggers `pengembalian_buku`
@@ -319,7 +331,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `pengembalian_buku`
 --
 ALTER TABLE `pengembalian_buku`
-  MODIFY `id_pengembalian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pengembalian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables

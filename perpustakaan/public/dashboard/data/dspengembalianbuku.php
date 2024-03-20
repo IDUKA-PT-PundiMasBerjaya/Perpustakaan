@@ -18,7 +18,9 @@
                 buku.stok,
                 buku.gambar AS gambar_buku,
                 pengembalian_buku.tanggal_pengembalian,
-                peminjaman.id_peminjaman AS peminjaman_id_peminjaman
+                peminjaman.id_peminjaman AS peminjaman_id_peminjaman,
+                pengembalian_buku.denda,
+                DATEDIFF(pengembalian_buku.tanggal_pengembalian, peminjaman.tanggal_kembali) AS telat_hari
                 FROM
                 pengembalian_buku
                 JOIN
@@ -49,16 +51,16 @@
     <title> Halaman Data Pengembalian Barang </title>
 </head>
 <body>
-    <form action="dspengembalianbuku.php" method="get">
+    <form action="dspengembalian_buku.php" method="get">
         <label>Cari: </label>
         <input type="text" name="cari" value="<?php echo isset($_GET['cari']) ? $_GET['cari'] : ''; ?>">
         <input type="submit" value="Cari">
     </form>
-    <?php include("../../pengembalianbuku/Controller/tabel_template.php") ?>
+    <?php include("../../pengembalianbuku/controller/tabel_template.php") ?>
     <?php 
         $totalPage = mysqli_num_rows(mysqli_query($kon, "SELECT * FROM pengembalian_buku")); 
         $totalPage = ceil($totalPage / $perPage);
-        include("../../pengembalianbuku/Controller/pagination_template.php")
+        include("../../pengembalianbuku/controller/pagination_template.php")
     ?>
 </body>
 </html>
